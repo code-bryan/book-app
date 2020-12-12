@@ -1,6 +1,8 @@
 import Button from 'components/molecules/Button';
 import FormField from 'components/molecules/FormField';
-import { Form, Formik } from 'formik';
+import LoginRequest from 'domain/authentication/senders/LoginRequest';
+import LoginValidator from 'domain/authentication/validators/LoginValidator';
+import { Form, Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,12 +15,14 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginForm: React.FC = () => {
-    const onSubmitHandler = () => {
-        console.log("Hola");
+    const [value] = React.useState(new LoginRequest('', ''));
+
+    const onSubmitHandler = (values: LoginRequest) => {
+        console.log(values)
     };
 
     return (
-        <Formik initialValues={{}} onSubmit={onSubmitHandler}>
+        <Formik initialValues={value} validationSchema={LoginValidator} onSubmit={onSubmitHandler}>
             <StyledForm>
                 <FormField name="email" type="email" placeholder="Correo electrónico"  />
                 <FormField name="password" type="password" placeholder="Contraseña" />
