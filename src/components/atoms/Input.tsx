@@ -10,6 +10,7 @@ const StyledInput: React.FC<IProps> = styled.input`
     background-color: ${Colors.WHITE};
     border-width: 0;
     height: 40px;
+    width: 100%;
     font-size: ${(props:  GenericProps) => props.size}px;
     font-weight: ${(props: GenericProps) => props.weight};
     padding-left: 15px;
@@ -31,6 +32,7 @@ const Input: React.FC<IProps> = ({ ...props }) => {
 Input.defaultProps = {
     size: 15,
     weight: 500,
+    color: 'primary'
 };
 
 export default Input;

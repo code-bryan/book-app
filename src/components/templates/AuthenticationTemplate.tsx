@@ -32,10 +32,11 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    svg: React.ReactNode;    
+    svg: React.ReactNode;  
+    form: React.ReactNode; 
 }
 
-const AuthenticationTemplate: React.FC<IProps> = ({ svg }) => {
+const AuthenticationTemplate: React.FC<IProps> = ({ svg, form }) => {
     return (
         <IonPage>
             <IonContent fullscreen>
@@ -47,10 +48,7 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg }) => {
                 <Container>
                     <Text color={'secondary'} size={25} weight={500}>Login</Text>
 
-                    <Input name="email" placeholder="Correo electrónico" />
-                    <Input type="password" name="password" placeholder="Contraseña" />
-
-                    <Button >Hola</Button>
+                    {form}
                 </Container>
             </IonContent>
         </IonPage>
