@@ -1,7 +1,6 @@
 import { IonContent, IonPage } from '@ionic/react';
-import Button from 'components/atoms/Button';
-import Input from 'components/atoms/Input';
 import Text from 'components/atoms/Text';
+import LinkButton from 'components/molecules/LinkButton';
 import React from 'react';
 import styled from 'styled-components';
 import Colors from 'theme/Colors';
@@ -16,10 +15,10 @@ const SvgContainer = styled.div`
 
 const Svg = styled.div`
     position: absolute;
+    top: 12%;
     width: 100%;
     display: flex;
     justify-content: center;
-    top: 12%;
 `;
 
 const Container = styled.div`
@@ -31,12 +30,19 @@ const Container = styled.div`
     padding: 40px 40px 0;
 `;
 
+const Footer = styled.div`
+    position: absolute;
+    bottom: 6%;
+    width: 73%;
+`;
+
 interface IProps {
     svg: React.ReactNode;  
-    form: React.ReactNode; 
+    form: React.ReactNode;
+    footer: React.ReactNode;
 }
 
-const AuthenticationTemplate: React.FC<IProps> = ({ svg, form }) => {
+const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
     return (
         <IonPage>
             <IonContent fullscreen>
@@ -46,9 +52,13 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg, form }) => {
                     </Svg>
                 </SvgContainer>
                 <Container>
-                    <Text color={'secondary'} size={25} weight={500}>Login</Text>
+                    <Text color={'secondary'} size={23} weight={600}>Login</Text>
 
                     {form}
+                    
+                    <Footer>
+                        {footer}
+                    </Footer>
                 </Container>
             </IonContent>
         </IonPage>

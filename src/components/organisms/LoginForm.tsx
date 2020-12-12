@@ -1,4 +1,4 @@
-import Button from 'components/atoms/Button';
+import Button from 'components/molecules/Button';
 import FormField from 'components/molecules/FormField';
 import { Form, Formik } from 'formik';
 import React from 'react';
