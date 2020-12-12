@@ -31,11 +31,17 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
+        {/* home routes */}
         <Route path="/home" component={Home} exact={true} />
+        
+
+        {/* authentication routes */}
         <Route path="/login" component={Login} exact={true} />
         <Route path="/register" component={Register} exact={true} />
         <Route path="/recover-password" component={RecoverPassword} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/login" />} />
+
+        {/* default */}
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

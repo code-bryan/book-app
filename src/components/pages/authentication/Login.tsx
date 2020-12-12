@@ -9,12 +9,26 @@ interface IProps {
 }
 
 const Login: React.FC<IProps> = ({ history }) => {
+  const onPasswordRecoverPressHandler = () => {
+    history.push('/recover-password')
+  };
+
+  const onRegisterPressHandler = () => {
+    history.push('/register');
+  }
+
+
   return (
     <AuthenticationTemplate
       title={<Text color={'secondary'} size={23} weight={600}>Login</Text>}
       svg={<LoginSvg />}
       form={<LoginForm />}
-      footer={<LoginFooter onPasswordRecoverPress={() => history.push('/recover-password')} onRegisterPress={() => history.push('/register')} />}
+      footer={
+        <LoginFooter 
+          onPasswordRecoverPress={onPasswordRecoverPressHandler} 
+          onRegisterPress={onRegisterPressHandler} 
+        />
+      }
     />
   );
 };
