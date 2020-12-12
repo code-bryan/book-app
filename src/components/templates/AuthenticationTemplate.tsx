@@ -32,14 +32,15 @@ const Container = styled.div`
 
 const Footer = styled.div`
     position: absolute;
-    bottom: 6%;
-    width: 73%;
+    bottom: 4%;
+    width: 100%;
+    padding: 0 25px 0;
 `;
 
 interface IProps {
     svg: React.ReactNode;  
     form: React.ReactNode;
-    footer: React.ReactNode;
+    footer?: React.ReactNode;
 }
 
 const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
@@ -55,11 +56,13 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
                     <Text color={'secondary'} size={23} weight={600}>Login</Text>
 
                     {form}
-                    
+                </Container>
+
+                {footer && (
                     <Footer>
                         {footer}
                     </Footer>
-                </Container>
+                )}
             </IonContent>
         </IonPage>
     );

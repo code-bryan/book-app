@@ -30,7 +30,7 @@ LinkButton.defaultProps = {
     color: 'secondary',
     size: 18,
     weight: 500,
-    height: 10,
+    height: 20,
     type: 'button',
 };
 
