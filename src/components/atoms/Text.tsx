@@ -1,12 +1,9 @@
+import { GenericProps } from 'domain/generic-ui/GenericProps';
 import React from 'react';
 import styled from 'styled-components';
 import Colors from 'theme/Colors';
 
-interface IProps {
-    color?: 'primary' | 'secondary',
-    size?: number;
-    weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'normal' | 'bold' | 'lighter' | 'bolder';
-}
+interface IProps extends GenericProps {}
 
 const TextContainer: React.FC<IProps> = styled.span`
     color: ${(props: IProps) => props.color === 'primary' ? Colors.PRIMARY : Colors.SECONDARY};

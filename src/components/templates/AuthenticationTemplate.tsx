@@ -1,4 +1,6 @@
 import { IonContent, IonPage } from '@ionic/react';
+import Button from 'components/atoms/Button';
+import Input from 'components/atoms/Input';
 import Text from 'components/atoms/Text';
 import React from 'react';
 import styled from 'styled-components';
@@ -22,6 +24,8 @@ const Svg = styled.div`
 
 const Container = styled.div`
     background-color: ${Colors.PRIMARY};
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 65%;
     padding: 40px 40px 0;
@@ -42,6 +46,11 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg }) => {
                 </SvgContainer>
                 <Container>
                     <Text color={'secondary'} size={25} weight={500}>Login</Text>
+
+                    <Input name="email" placeholder="Correo electrónico" />
+                    <Input type="password" name="password" placeholder="Contraseña" />
+
+                    <Button >Hola</Button>
                 </Container>
             </IonContent>
         </IonPage>
