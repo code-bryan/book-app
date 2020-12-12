@@ -1,4 +1,3 @@
-import LoginSvg from 'components/atoms/LoginSvg';
 import AuthenticationTemplate from 'components/templates/AuthenticationTemplate';
 import Text from 'components/atoms/Text';
 import React from 'react';
