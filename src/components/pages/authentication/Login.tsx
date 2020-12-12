@@ -5,7 +5,7 @@ import AuthenticationTemplate from 'components/templates/AuthenticationTemplate'
 import Text from 'components/atoms/Text';
 import React from 'react';
 
-const Home: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <AuthenticationTemplate 
       title={<Text color={'secondary'} size={23} weight={600}>Login</Text>}
@@ -16,4 +16,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Login;

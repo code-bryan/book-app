@@ -1,9 +1,11 @@
 import { IonContent, IonPage } from '@ionic/react';
-import Text from 'components/atoms/Text';
-import LinkButton from 'components/molecules/LinkButton';
 import React from 'react';
 import styled from 'styled-components';
 import Colors from 'theme/Colors';
+
+const Title: React.FC<{  top: number }> = styled.div`
+    margin-top: ${(props: {  top: number }) => props.top}px;
+`;
 
 const SvgContainer = styled.div`
     width: 100%;
@@ -14,8 +16,6 @@ const SvgContainer = styled.div`
 `;
 
 const Svg = styled.div`
-    position: absolute;
-    top: 12%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@ const Container = styled.div`
     flex-direction: column;
     width: 100%;
     height: 65%;
-    padding: 40px 40px 0;
+    padding: 20px 40px 0;
 `;
 
 const Footer = styled.div`
@@ -38,12 +38,14 @@ const Footer = styled.div`
 `;
 
 interface IProps {
+    title: React.ReactNode;
+    titleTop?: number;
     svg: React.ReactNode;  
     form: React.ReactNode;
     footer?: React.ReactNode;
 }
 
-const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
+const AuthenticationTemplate: React.FC<IProps> = ({ title, titleTop, svg, form, footer }) => {
     return (
         <IonPage>
             <IonContent fullscreen>
@@ -53,7 +55,9 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
                     </Svg>
                 </SvgContainer>
                 <Container>
-                    <Text color={'secondary'} size={23} weight={600}>Login</Text>
+                    <Title top={titleTop ? titleTop : 40}>
+                        {title}
+                    </Title>
 
                     {form}
                 </Container>
@@ -67,5 +71,9 @@ const AuthenticationTemplate: React.FC<IProps> = ({ svg, form, footer }) => {
         </IonPage>
     );
 };
+
+AuthenticationTemplate.defaultProps = {
+    titleTop: 40    
+}
 
 export default AuthenticationTemplate;
