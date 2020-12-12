@@ -5,11 +5,12 @@ import RecoverPasswordForm from 'components/organisms/authentication/RecoverPass
 import RecoverPasswordSvg from 'components/atoms/RecoverPasswordSvg';
 import BackButton from 'components/molecules/BackButton';
 import { IonBackButton } from '@ionic/react';
+import Colors from 'theme/Colors';
 
 const RecoverPassword: React.FC = () => {
   return (
     <AuthenticationTemplate 
-      backButton={<IonBackButton />}
+      backButton={<IonBackButton color={Colors.SECONDARY} />}
       title={<Text color={'secondary'} size={22} weight={600}>Recuperar contraseña</Text>}
       titleTop={40}
       svg={<RecoverPasswordSvg />}

@@ -61,7 +61,7 @@ const AuthenticationTemplate: React.FC<IProps> = ({ title, backButton, titleTop,
     return (
         <IonPage>
             {backButton && (
-                <IonHeader>
+                <IonHeader mode="ios">
                     <Toolbar>
                         <BackButtonContainer slot="start">{backButton}</BackButtonContainer>
                     </Toolbar>
