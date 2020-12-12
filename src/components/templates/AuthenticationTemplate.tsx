@@ -1,7 +1,14 @@
-import { IonContent, IonPage } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import Colors from 'theme/Colors';
+
+const Toolbar = styled(IonToolbar)`
+    --background: transparent;
+    --border-color: transparent;
+    --border-style: none;
+    --box-shadow: none;
+`;
 
 const Title: React.FC<{  top: number }> = styled.div`
     margin-top: ${(props: {  top: number }) => props.top}px;
@@ -37,17 +44,29 @@ const Footer = styled.div`
     padding: 0 25px 0;
 `;
 
+const BackButtonContainer = styled(IonButtons)`
+ 
+`;
+
 interface IProps {
     title: React.ReactNode;
+    backButton?:  React.ReactNode;
     titleTop?: number;
     svg: React.ReactNode;  
     form: React.ReactNode;
     footer?: React.ReactNode;
 }
 
-const AuthenticationTemplate: React.FC<IProps> = ({ title, titleTop, svg, form, footer }) => {
+const AuthenticationTemplate: React.FC<IProps> = ({ title, backButton, titleTop, svg, form, footer }) => {
     return (
         <IonPage>
+            {backButton && (
+                <IonHeader>
+                    <Toolbar>
+                        <BackButtonContainer slot="start">{backButton}</BackButtonContainer>
+                    </Toolbar>
+                </IonHeader>
+            )}
             <IonContent fullscreen>
                 <SvgContainer>
                     <Svg>
