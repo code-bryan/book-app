@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     width: 75%;
     position: absolute;
-    top: 12%;
+    top: 11.5%;
 `;
 
 const SVGImage: React.FC = () => {
