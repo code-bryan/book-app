@@ -2,8 +2,8 @@ import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Book from 'domain/books/entities/Book';
 
-const Img = require('assets/images/book-image.png');
 const IMAGE_WIDTH = 130;
 
 
@@ -27,12 +27,16 @@ const AuthorText = styled(Text)`
     opacity: .8;
 `;
 
-const BookInformation: React.FC = () => (
+interface IProps {
+    data: Book;
+}
+
+const BookInformation: React.FC<IProps> = ({ data }) => (
     <Container>
-        <Image src={Img} width={IMAGE_WIDTH} />
+        <Image src={data.image} width={IMAGE_WIDTH} />
         <TextContainer>
-            <Text color="secondary" size={14} weight={500}>The Holy Bible</Text>
-            <AuthorText color="secondary" size={14} weight={500}>Steven King</AuthorText>
+            <Text color="secondary" size={14} weight={500}>{data.name}</Text>
+            <AuthorText color="secondary" size={14} weight={500}>{data.authors[0]}</AuthorText>
         </TextContainer>
     </Container>
 );

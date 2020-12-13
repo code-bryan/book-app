@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import Colors from 'theme/Colors';
+import Collection from 'domain/books/entities/Collection';
 
 const Img = require('assets/images/collection-image.png');
 const IMAGE_WIDTH = 176;
@@ -39,26 +40,22 @@ const DotIcon = styled.div`
     margin-right: 2.5px;
 `;
 
-const CollectionInformation: React.FC = () => {
+interface IProps {
+    data: Collection;
+}
+
+const CollectionInformation: React.FC<IProps> = ({ data }) => {
     return (
         <Container>
-            <Image src={Img} height={176} width={IMAGE_WIDTH} />
+            <Image src={data.image} height={176} width={IMAGE_WIDTH} />
             <TextContainer>
-                <Text color="secondary" size={12} weight={"bold"}>Ideas - Libros motivaciones</Text>
-                <DotTextContainer>
-                    <DotIcon />
-                    <Text color="secondary" size={11} weight={600}>Inspirarse</Text>
-                </DotTextContainer>
-
-                <DotTextContainer>
-                    <DotIcon />
-                    <Text color="secondary" size={11} weight={600}>Aprender</Text>
-                </DotTextContainer>
-
-                <DotTextContainer>
-                    <DotIcon />
-                    <Text color="secondary" size={11} weight={600}>Recuentos de la vida</Text>
-                </DotTextContainer>
+                <Text color="secondary" size={12} weight={"bold"}>{data.name}</Text>
+                {data.quotes.map((quote, index) => (
+                    <DotTextContainer key={`${quote}-${index}`}>
+                        <DotIcon />
+                        <Text color="secondary" size={11} weight={600}>{quote}</Text>
+                    </DotTextContainer>
+                ))}
             </TextContainer>
         </Container>
     );

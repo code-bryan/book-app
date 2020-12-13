@@ -2,11 +2,11 @@ import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import SearchToolbar from 'components/molecules/SearchToolbar';
-import BookInformation from 'components/molecules/BookInformation';
 import HorizontalScrollList from 'components/atoms/HorizontalScrollList';
-import CollectionInformation from 'components/molecules/CollectionInformation';
-import CategoryCard from 'components/molecules/CategoryCard';
 import { HorizontalScrollItem } from 'components/atoms/ScrollItem';
+import Book from 'domain/books/entities/Book';
+import Category from 'domain/books/entities/Category';
+import Collection from 'domain/books/entities/Collection';
 
 const Container = styled(IonContent)`
     padding-left: 20px;
@@ -26,15 +26,20 @@ const SectionInformationContainer = styled.div`
 `;
 
 interface IProps {
+    newBooks: Book[];
     newBooksTitle: React.ReactNode;
-    NewBookItem: React.ComponentType;
+    newBookItem: React.ComponentType<any>;
+
+    categories: Category[];
     categoriesTitle: React.ReactNode;
-    CategoryItem: React.ComponentType;
+    categoryItem: React.ComponentType<any>;
+
+    collections: Collection[]
     discoverTitle: React.ReactNode;
-    DiscoveryItem: React.ComponentType;
+    discoveryItem: React.ComponentType<any>;
 }
 
-const DashboardTemplate: React.FC<IProps> = ({ newBooksTitle, NewBookItem, categoriesTitle, CategoryItem, discoverTitle, DiscoveryItem }) => {
+const DashboardTemplate: React.FC<IProps> = ({ newBooks, newBooksTitle, newBookItem, categoriesTitle, categories, categoryItem, collections, discoverTitle, discoveryItem }) => {
 
     return (
         <IonPage>
@@ -47,9 +52,11 @@ const DashboardTemplate: React.FC<IProps> = ({ newBooksTitle, NewBookItem, categ
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <HorizontalScrollItem>
-                           <NewBookItem />
-                        </HorizontalScrollItem>
+                        {newBooks.map((data) => (
+                            <HorizontalScrollItem key={data.id}>
+                                {React.createElement<any>(newBookItem, { data })}
+                            </HorizontalScrollItem>
+                        ))}
                     </HorizontalScrollList>
                 </Section>
 
@@ -59,9 +66,11 @@ const DashboardTemplate: React.FC<IProps> = ({ newBooksTitle, NewBookItem, categ
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <HorizontalScrollItem>
-                            <CategoryItem>Horror</CategoryItem>
-                        </HorizontalScrollItem>
+                        {categories.map((data) => (
+                            <HorizontalScrollItem key={data.id}>
+                                {React.createElement<any>(categoryItem, { data })}
+                            </HorizontalScrollItem>
+                        ))}
                     </HorizontalScrollList>
                 </Section>
 
@@ -71,9 +80,11 @@ const DashboardTemplate: React.FC<IProps> = ({ newBooksTitle, NewBookItem, categ
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <HorizontalScrollItem>
-                            <DiscoveryItem />
-                        </HorizontalScrollItem>
+                        {collections.map((data) => (
+                            <HorizontalScrollItem key={data.id}>
+                                 {React.createElement<any>(discoveryItem, { data })}
+                            </HorizontalScrollItem>
+                        ))}
                     </HorizontalScrollList>
                 </LastSection>
 

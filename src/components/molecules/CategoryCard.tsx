@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Text from 'components/atoms/Text';
 import { IonButton } from '@ionic/react';
+import Category from 'domain/books/entities/Category';
 
 const Container = styled(IonButton)`
     width: 130px;
@@ -17,10 +18,14 @@ const Container = styled(IonButton)`
     --box-shadow: none;
 `;
 
-const CategoryCard: React.FC = ({children}) => {
+interface IProps {
+    data: Category;
+}
+
+const CategoryCard: React.FC<IProps> = ({data}) => {
     return (
         <Container>
-            <Text color="secondary" size={15} weight={500}>{children}</Text>
+            <Text color="secondary" size={15} weight={500}>{data.name}</Text>
         </Container>
     )
 };
