@@ -28,15 +28,15 @@ const AuthorText = styled(Text)`
 `;
 
 interface IProps {
-    data: Book;
+    book: Book;
 }
 
-const BookInformation: React.FC<IProps> = ({ data }) => (
+const BookInformation: React.FC<IProps> = ({ book }) => (
     <Container>
-        <Image src={data.image} width={IMAGE_WIDTH} />
+        <Image src={book.image} width={IMAGE_WIDTH} />
         <TextContainer>
-            <Text color="secondary" size={14} weight={500}>{data.name}</Text>
-            <AuthorText color="secondary" size={14} weight={500}>{data.authors[0]}</AuthorText>
+            <Text color="secondary" size={14} weight={500}>{book.name}</Text>
+            <AuthorText color="secondary" size={14} weight={500}>{book.authors[0]}</AuthorText>
         </TextContainer>
     </Container>
 );

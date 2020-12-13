@@ -19,13 +19,13 @@ const Container = styled(IonButton)`
 `;
 
 interface IProps {
-    data: Category;
+    category: Category;
 }
 
-const CategoryCard: React.FC<IProps> = ({data}) => {
+const CategoryCard: React.FC<IProps> = ({category}) => {
     return (
         <Container>
-            <Text color="secondary" size={15} weight={500}>{data.name}</Text>
+            <Text color="secondary" size={15} weight={500}>{category.name}</Text>
         </Container>
     )
 };

@@ -1,6 +1,6 @@
-import BookInformation from 'components/molecules/BookInformation';
-import CategoryCard from 'components/molecules/CategoryCard';
-import CollectionInformation from 'components/molecules/CollectionInformation';
+import BookList from 'components/organisms/HorizontalBookList';
+import HorizontalCategoryList from 'components/organisms/HorizontalCategoryList';
+import HorizontalCollectionList from 'components/organisms/HorizontalCollectionList';
 import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
 import BooksTestData from 'domain/books/test/BooksTestData';
@@ -11,17 +11,12 @@ import React from 'react';
 const Home: React.FC = () => {
   return (
     <DashboardTemplate
-        newBooks={BooksTestData}
-        newBooksTitle={<SectionInformation>Libros nuevos</SectionInformation>}
-        newBookItem={BookInformation}
-
-        categories={CategoryTestData}
+        booksTitle={<SectionInformation>Libros nuevos</SectionInformation>}
+        bookList={<BookList books={BooksTestData} />}
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
-        categoryItem={CategoryCard}
-
-        collections={CollectionTestData}
+        categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
         discoverTitle={<SectionInformation>Descubre</SectionInformation>}
-        discoveryItem={CollectionInformation}
+        collectionList={<HorizontalCollectionList collections={CollectionTestData} />}
     />
   );
 };
