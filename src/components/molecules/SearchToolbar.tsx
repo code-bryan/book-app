@@ -21,7 +21,7 @@ const SearchToolbar: React.FC = () => {
     return (
         <IonHeader mode="ios">
             <Toolbar>
-                <Text color="secondary" size={22} weight={500}>Hi, Bryan Astacio</Text>
+                <Text color="secondary" size={22} weight={500}>Hola, Bryan Astacio</Text>
                 <SearchInputContainer>
                     <SearchInput placeholder="Libro, Autor o Colleción" />
                 </SearchInputContainer>

@@ -22,7 +22,7 @@ const Button = styled(IonButton)`
     outline: none;
     letter-spacing: normal;
     text-transform: none;
-    --background: #6761AA;
+    --background: #9490C3;
     --border-radius: 5px;
     --box-shadow: none;
 `;
