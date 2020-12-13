@@ -19,6 +19,10 @@ const Home: React.FC<IProps> = ({ history }) => {
     history.push('/new-books')
   }
 
+  const onTapDiscoverHandler = () => {
+    history.push('/discover')
+  }
+
   return (
     <DashboardTemplate
         toolbar={<SearchToolbar />}
@@ -26,7 +30,7 @@ const Home: React.FC<IProps> = ({ history }) => {
         bookList={<BookList books={BooksTestData} />}
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
-        discoverTitle={<SectionInformation>Descubre</SectionInformation>}
+        discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}
         collectionList={<HorizontalCollectionList collections={CollectionTestData} />}
     />
   );

@@ -7,7 +7,7 @@ import FilterButton from 'components/molecules/FilterButton';
 const NewBookList = () => {
     return (
         <BookListTemplate
-            toolbar={<GenericToolbarContent button={<FilterButton />} />}
+            toolbar={<GenericToolbarContent title="Libros Nuevos" button={<FilterButton />} />}
             bookList={<BookList />}
         />
     )

@@ -5,11 +5,8 @@ import Text from 'components/atoms/Text';
 import Colors from 'theme/Colors';
 import Collection from 'domain/books/entities/Collection';
 
-const Img = require('assets/images/collection-image.png');
-const IMAGE_WIDTH = 176;
-
 const Container = styled.div`
-    width: ${IMAGE_WIDTH}px;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -42,14 +39,16 @@ const DotIcon = styled.div`
 
 interface IProps {
     data: Collection;
+    width?: number;
+    height?: number;
 }
 
-const CollectionInformation: React.FC<IProps> = ({ data }) => {
+const CollectionInformation: React.FC<IProps> = ({ data, width, height }) => {
     return (
         <Container>
-            <Image src={data.image} height={176} width={IMAGE_WIDTH} />
+            <Image src={data.image} height={height} width={width} />
             <TextContainer>
-                <Text color="secondary" size={12} weight={"bold"}>{data.name}</Text>
+                <Text color="secondary" size={12} weight={"bold"} width={`${width}px`}>{data.name}</Text>
                 {data.quotes.map((quote, index) => (
                     <DotTextContainer key={`${quote}-${index}`}>
                         <DotIcon />
@@ -59,6 +58,11 @@ const CollectionInformation: React.FC<IProps> = ({ data }) => {
             </TextContainer>
         </Container>
     );
+}
+
+CollectionInformation.defaultProps = {
+    width: 176,
+    height: 176,
 }
 
 export default CollectionInformation;

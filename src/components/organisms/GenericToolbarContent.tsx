@@ -21,15 +21,16 @@ const TextContainer = styled.div`
 
 interface IProps {
     button?: React.ReactNode;
+    title: string;
 }
 
-const GenericToolbarContent: React.FC<IProps> = ({ button }) => {
+const GenericToolbarContent: React.FC<IProps> = ({ button, title }) => {
     return (
         <Container>
             <BackButton />
             
             <TextContainer>
-                <Text color="secondary" size={30} weight={500}>Libros Nuevos</Text>
+                <Text color="secondary" size={30} weight={500}>{title}</Text>
                 {button && button}
             </TextContainer>
         </Container>        

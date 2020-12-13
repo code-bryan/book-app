@@ -22,11 +22,12 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import '../theme/variables.css';
 
-import Home from './pages/Home';
+import Home from './pages/home/Home';
+import NewBookList from './pages/home/NewBookList';
+import Discover from './pages/home/Discover';
 import Register from './pages/authentication/Register';
 import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
-import NewBookList from './pages/books/NewBookList';
 
 const App: React.FC = () => (
   <IonApp>
@@ -35,6 +36,7 @@ const App: React.FC = () => (
         {/* home routes */}
         <Route path="/home" component={Home} exact={true} />
         <Route path="/new-books" component={NewBookList} exact={true} />
+        <Route path='/discover' component={Discover} exact={true} />
         
 
         {/* authentication routes */}
