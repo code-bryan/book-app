@@ -12,15 +12,25 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
     padding: 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 `;
 
-const GenericToolbarContent = () => {
+interface IProps {
+    button?: React.ReactNode;
+}
+
+const GenericToolbarContent: React.FC<IProps> = ({ button }) => {
     return (
         <Container>
             <BackButton />
             
             <TextContainer>
                 <Text color="secondary" size={30} weight={500}>Libros Nuevos</Text>
+                {button && button}
             </TextContainer>
         </Container>        
     )

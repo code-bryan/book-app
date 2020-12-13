@@ -4,4 +4,5 @@ export default {
     WHITE: '#FFFFFF',
     SEARCH_BLACK: 'rgba(0,0,0,.1)',
     PLACEHOLDER_SECONDARY: 'rgba(63, 61, 86, .8)',
+    BUTTON_COLOR: 'rgba(0,0,0,.15)'
 }
