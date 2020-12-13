@@ -1,7 +1,7 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
-import SearchToolbar from 'components/molecules/SearchToolbar';
+import GenericToolbar from 'components/atoms/GenericToolbar';
 
 const Container = styled(IonContent)`
     padding-left: 20px;
@@ -21,6 +21,8 @@ const SectionInformationContainer = styled.div`
 `;
 
 interface IProps {
+    toolbar: React.ReactNode;
+
     booksTitle: React.ReactNode;
     bookList: React.ReactNode;
 
@@ -31,11 +33,13 @@ interface IProps {
     collectionList: React.ReactNode;
 }
 
-const DashboardTemplate: React.FC<IProps> = ({ booksTitle, bookList, categoriesTitle, categoryList,  discoverTitle, collectionList }) => {
+const DashboardTemplate: React.FC<IProps> = ({ toolbar, booksTitle, bookList, categoriesTitle, categoryList,  discoverTitle, collectionList }) => {
 
     return (
-        <IonPage>
-            <SearchToolbar />   
+        <IonPage> 
+            <GenericToolbar>
+                {toolbar}
+            </GenericToolbar>
             <Container fullscreen scrollY>
 
                 <Section>

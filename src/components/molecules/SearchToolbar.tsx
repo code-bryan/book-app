@@ -16,18 +16,13 @@ const SearchInputContainer = styled.div`
     margin: 15px 0;
 `;
 
-const SearchToolbar: React.FC = () => {
-
-    return (
-        <IonHeader mode="ios">
-            <Toolbar>
-                <Text color="secondary" size={22} weight={500}>Hola, Bryan Astacio</Text>
-                <SearchInputContainer>
-                    <SearchInput placeholder="Libro, Autor o Colleción" />
-                </SearchInputContainer>
-            </Toolbar>
-        </IonHeader>
-    );
-}
+const SearchToolbar: React.FC = () => (
+    <>
+        <Text color="secondary" size={22} weight={500}>Hola, Bryan Astacio</Text>
+        <SearchInputContainer>
+            <SearchInput placeholder="Libro, Autor o Colleción" />
+        </SearchInputContainer>
+    </>
+);
 
 export default SearchToolbar;

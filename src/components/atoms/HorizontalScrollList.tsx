@@ -9,7 +9,7 @@ interface IProps {
 
 const HorizontalScrollList: React.FC<IProps> = ({ children, paddingSize }) => (
     <IonSlides 
-        style={{ width: '100%', paddingLeft: paddingSize, paddingRight: paddingSize }} 
+        style={{ width: '100%', paddingLeft: paddingSize }} 
         options={options}
         mode="ios"
     >
