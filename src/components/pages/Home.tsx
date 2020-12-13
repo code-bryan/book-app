@@ -8,12 +8,21 @@ import BooksTestData from 'domain/books/test/BooksTestData';
 import CategoryTestData from 'domain/books/test/CategoryTestData';
 import CollectionTestData from 'domain/books/test/CollectionTestData';
 import React from 'react';
+import { RouteComponentProps, StaticContext } from 'react-router';
 
-const Home: React.FC = () => {
+interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
+
+}
+
+const Home: React.FC<IProps> = ({ history }) => {
+  const onTapNewBooksHandler = () => {
+    history.push('/new-books')
+  }
+
   return (
     <DashboardTemplate
         toolbar={<SearchToolbar />}
-        booksTitle={<SectionInformation>Libros nuevos</SectionInformation>}
+        booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
         bookList={<BookList books={BooksTestData} />}
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={<HorizontalCategoryList categories={CategoryTestData} />}

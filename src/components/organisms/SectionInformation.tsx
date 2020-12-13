@@ -10,11 +10,15 @@ const Container = styled.div`
     align-items:center;
 `;
 
-const SectionInformation: React.FC = ({ children }) => {
+interface IProps {
+    onTap?: () => void;
+}
+
+const SectionInformation: React.FC<IProps> = ({ children, onTap }) => {
     return (
         <Container>
             <Text color="secondary" size={18} weight={600}>{children}</Text>
-            <SeeAllButton />
+            <SeeAllButton onTap={() => onTap?.()} />
         </Container>
     );
 };

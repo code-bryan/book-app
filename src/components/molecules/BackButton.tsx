@@ -8,7 +8,7 @@ const BackButtonIonic = styled(IonBackButton)`
     --color: ${Colors.SECONDARY};
     font-size: 14px;
     font-weight: 500;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 `;
 
 const BackButton: React.FC = () => {

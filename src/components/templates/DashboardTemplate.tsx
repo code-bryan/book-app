@@ -40,8 +40,7 @@ const DashboardTemplate: React.FC<IProps> = ({ toolbar, booksTitle, bookList, ca
             <GenericToolbar>
                 {toolbar}
             </GenericToolbar>
-            <Container fullscreen scrollY>
-
+            <Container fullscreen>
                 <Section>
                     <SectionInformationContainer>
                         {booksTitle}

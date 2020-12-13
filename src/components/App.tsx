@@ -43,7 +43,7 @@ const App: React.FC = () => (
         <Route path="/recover-password" component={RecoverPassword} exact={true} />
 
         {/* default */}
-        <Route exact path="/" render={() => <Redirect to="/new-books" />} />
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

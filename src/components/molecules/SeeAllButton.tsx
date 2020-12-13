@@ -21,9 +21,16 @@ const Icon = styled(ChevronRight)`
     margin: 0;
 `;
 
-const SeeAllButton = () => {
+interface IProps {
+    onTap?: () => void;
+}
+
+const SeeAllButton: React.FC<IProps> = ({ onTap }) => {
     return (
-        <Container>
+        <Container onClick={e => {
+            e.preventDefault();
+            onTap?.();
+        }}>
             <Text size={12}>Ver Todos</Text>
             <Icon />
         </Container>

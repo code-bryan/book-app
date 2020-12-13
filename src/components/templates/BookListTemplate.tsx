@@ -1,4 +1,4 @@
-import { IonApp, IonContent } from '@ionic/react';
+import { IonApp, IonContent, IonPage } from '@ionic/react';
 import GenericToolbar from 'components/atoms/GenericToolbar';
 import React from 'react'
 
@@ -9,14 +9,14 @@ interface IProps {
 
 const BookListTemplate: React.FC<IProps> = ({ toolbar, bookList }) => {
     return (
-        <IonApp>
+        <IonPage>
             <GenericToolbar>
                 {toolbar}
             </GenericToolbar>
-            <IonContent>
+            <IonContent fullscreen>
                 {bookList}
             </IonContent>
-        </IonApp>
+        </IonPage>
     );
 };
 
