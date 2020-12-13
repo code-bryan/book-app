@@ -26,6 +26,7 @@ import Home from './pages/Home';
 import Register from './pages/authentication/Register';
 import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
+import NewBookList from './pages/books/NewBookList';
 
 const App: React.FC = () => (
   <IonApp>
@@ -33,6 +34,7 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         {/* home routes */}
         <Route path="/home" component={Home} exact={true} />
+        <Route path="/new-books" component={NewBookList} exact={true} />
         
 
         {/* authentication routes */}
@@ -41,7 +43,7 @@ const App: React.FC = () => (
         <Route path="/recover-password" component={RecoverPassword} exact={true} />
 
         {/* default */}
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
+        <Route exact path="/" render={() => <Redirect to="/new-books" />} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

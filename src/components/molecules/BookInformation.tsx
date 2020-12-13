@@ -1,14 +1,11 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import Book from 'domain/books/entities/Book';
 
-const IMAGE_WIDTH = 130;
-
-
 const Container = styled.div`
-    width: ${IMAGE_WIDTH}px;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -33,7 +30,7 @@ interface IProps {
 
 const BookInformation: React.FC<IProps> = ({ book }) => (
     <Container>
-        <Image src={book.image} width={IMAGE_WIDTH} />
+        <Image src={book.image} />
         <TextContainer>
             <Text color="secondary" size={14} weight={500}>{book.name}</Text>
             <AuthorText color="secondary" size={14} weight={500}>{book.authors[0]}</AuthorText>
