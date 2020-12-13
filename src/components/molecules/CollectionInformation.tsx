@@ -1,25 +1,18 @@
-import { IonSlide } from '@ionic/react';
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
-import { Circle } from 'react-feather';
 import Colors from 'theme/Colors';
 
 const Img = require('assets/images/collection-image.png');
 const IMAGE_WIDTH = 176;
 
-interface IProps {
-    marginRight?: number;
-}
-
-const Container: React.FC<HTMLAttributes<HTMLIonSlideElement> & IProps> = styled(IonSlide)`
+const Container = styled.div`
     width: ${IMAGE_WIDTH}px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-right: ${(props: IProps) => props.marginRight}px;
 `;
 
 const TextContainer = styled.div`
@@ -46,9 +39,9 @@ const DotIcon = styled.div`
     margin-right: 2.5px;
 `;
 
-const CollectionInformation: React.FC<IProps> = ({ ...props }) => {
+const CollectionInformation: React.FC = () => {
     return (
-        <Container {...props}>
+        <Container>
             <Image src={Img} height={176} width={IMAGE_WIDTH} />
             <TextContainer>
                 <Text color="secondary" size={12} weight={"bold"}>Ideas - Libros motivaciones</Text>

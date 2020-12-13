@@ -1,12 +1,12 @@
-import { IonContent, IonHeader, IonList, IonPage, IonSlides, IonToolbar } from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import SearchToolbar from 'components/molecules/SearchToolbar';
 import BookInformation from 'components/molecules/BookInformation';
 import HorizontalScrollList from 'components/atoms/HorizontalScrollList';
-import SectionInformation from 'components/organisms/SectionInformation';
 import CollectionInformation from 'components/molecules/CollectionInformation';
 import CategoryCard from 'components/molecules/CategoryCard';
+import { HorizontalScrollItem } from 'components/atoms/ScrollItem';
 
 const Container = styled(IonContent)`
     padding-left: 20px;
@@ -25,11 +25,16 @@ const SectionInformationContainer = styled.div`
     margin-bottom: 10px;
 `;
 
-const CollectionInformationContainer = styled.div`
-    margin-right: 10px;
-`;
+interface IProps {
+    newBooksTitle: React.ReactNode;
+    NewBookItem: React.ComponentType;
+    categoriesTitle: React.ReactNode;
+    CategoryItem: React.ComponentType;
+    discoverTitle: React.ReactNode;
+    DiscoveryItem: React.ComponentType;
+}
 
-const DashboardTemplate: React.FC = () => {
+const DashboardTemplate: React.FC<IProps> = ({ newBooksTitle, NewBookItem, categoriesTitle, CategoryItem, discoverTitle, DiscoveryItem }) => {
 
     return (
         <IonPage>
@@ -38,46 +43,37 @@ const DashboardTemplate: React.FC = () => {
 
                 <Section>
                     <SectionInformationContainer>
-                        <SectionInformation>Libros nuevos</SectionInformation>
+                        {newBooksTitle}
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <BookInformation marginRight={10} />
-                        <BookInformation marginRight={10} />
-                        <BookInformation marginRight={10} />
-                        <BookInformation marginRight={10} />
-                        <BookInformation marginRight={10} />
-                        <BookInformation marginRight={10} />
+                        <HorizontalScrollItem>
+                           <NewBookItem />
+                        </HorizontalScrollItem>
                     </HorizontalScrollList>
                 </Section>
 
                 <Section>
                     <SectionInformationContainer>
-                        <SectionInformation>Categorias</SectionInformation>
+                        {categoriesTitle}
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        <CategoryCard marginRight={10}>Horror</CategoryCard>
-                        
+                        <HorizontalScrollItem>
+                            <CategoryItem>Horror</CategoryItem>
+                        </HorizontalScrollItem>
                     </HorizontalScrollList>
                 </Section>
 
                 <LastSection>
                     <SectionInformationContainer>
-                        <SectionInformation>Descubre</SectionInformation>
+                        {discoverTitle}
                     </SectionInformationContainer>
                     
                     <HorizontalScrollList paddingSize={15}>
-                        <CollectionInformation marginRight={10} />
-                        <CollectionInformation marginRight={10} />
-                        <CollectionInformation marginRight={10} />
-                        <CollectionInformation marginRight={10} />
-                        <CollectionInformation marginRight={10} />
+                        <HorizontalScrollItem>
+                            <DiscoveryItem />
+                        </HorizontalScrollItem>
                     </HorizontalScrollList>
                 </LastSection>
 

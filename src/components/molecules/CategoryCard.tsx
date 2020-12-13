@@ -1,21 +1,11 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Text from 'components/atoms/Text';
-import { IonButton, IonSlide } from '@ionic/react';
+import { IonButton } from '@ionic/react';
 
-interface IProps {
-    marginRight?: number;
-}
-
-const Container: React.FC<HTMLAttributes<HTMLIonSlideElement> & IProps> = styled(IonSlide)`
+const Container = styled(IonButton)`
     width: 130px;
     height: 60px;
-    margin-right: ${(props: IProps) => props.marginRight}px;
-`;
-
-const Button = styled(IonButton)`
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,18 +17,13 @@ const Button = styled(IonButton)`
     --box-shadow: none;
 `;
 
-const CategoryCard: React.FC<IProps> = ({children, ...props}) => {
+const CategoryCard: React.FC = ({children}) => {
     return (
-        <Container {...props}>
-            <Button>
-                <Text color="secondary" size={15} weight={500}>{children}</Text>
-            </Button>
+        <Container>
+            <Text color="secondary" size={15} weight={500}>{children}</Text>
         </Container>
     )
 };
 
-CategoryCard.defaultProps = {
-    marginRight: 0
-};
 
 export default CategoryCard;
