@@ -13,7 +13,7 @@ const Container = styled.div`
 const SectionInformation: React.FC = ({ children }) => {
     return (
         <Container>
-            <Text color="secondary" size={18} weight={500}>{children}</Text>
+            <Text color="secondary" size={18} weight={600}>{children}</Text>
             <SeeAllButton />
         </Container>
     );
