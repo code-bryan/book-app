@@ -7,7 +7,7 @@ import { Search } from 'react-feather';
 type IProps = GenericProps & InputHTMLAttributes<HTMLInputElement>;
 
 const InputContainer: React.FC = styled.div`
-    background-color: ${Colors.BLACK};
+    background-color: ${Colors.SEARCH_BLACK};
     border-radius: 5px;
     height: 35px;
     width: 100%;
