@@ -242,3 +242,13 @@ ion-tab-bar {
   color: #3f3d56;
   --color-selected: #000;
 }
+
+.tab-selected .icon-selected {
+  background: rgba(255, 255, 255, .4);
+  border-radius: 50%;
+  width: 50px;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
