@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import GenericToolbar from 'components/atoms/GenericToolbar';

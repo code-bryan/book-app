@@ -1,8 +1,7 @@
 import Button from 'components/molecules/Button';
 import FormField from 'components/molecules/FormField';
-import LoginRequest from 'domain/authentication/senders/LoginRequest';
 import RecoverPasswordRequest from 'domain/authentication/senders/RecoverPasswordRequest';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
 

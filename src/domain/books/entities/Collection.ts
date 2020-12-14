@@ -1,5 +1,3 @@
-import { queries } from "@testing-library/react";
-
 export default class Collection {
     id: string;
     name: string;

@@ -1,7 +1,5 @@
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
-import BookInformation from 'components/molecules/BookInformation';
 import CollectionInformation from 'components/molecules/CollectionInformation';
-import BooksTestData from 'domain/books/test/BooksTestData';
 import CollectionTestData from 'domain/books/test/CollectionTestData';
 import React from 'react';
 import styled from 'styled-components';

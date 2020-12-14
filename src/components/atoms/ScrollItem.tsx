@@ -1,5 +1,4 @@
 import { IonSlide } from '@ionic/react';
-import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 export const HorizontalScrollItem = styled(IonSlide)`

@@ -1,5 +1,5 @@
 import LinkButton from 'components/molecules/LinkButton';
-import React, { DetailedHTMLProps } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Footer = styled.div`

@@ -14,7 +14,7 @@ const Field = styled.div`
 `;
 
 const FormField: React.FC<IProps> = ({ weight, color, size, placeholder, ...props }) => {
-    const [field, meta, helpers] = useField(props);
+    const [field] = useField(props);
     
     return (
         <Field>
