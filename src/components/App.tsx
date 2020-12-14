@@ -31,7 +31,7 @@ import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
 import Search from './pages/search/Search';
 
-const STYLES = { width: isPlatform('ios') ? '48%' : '85%' };
+const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
 const App: React.FC = () => (
   <IonApp>
@@ -54,7 +54,7 @@ const App: React.FC = () => (
             {/* default */}
             <Route exact path="/" render={() => <Redirect to="/home" />} />
           </IonRouterOutlet>
-          <IonTabBar slot="bottom">
+          <IonTabBar slot="bottom" style={{ height: '56px' }}>
               <IonTabButton tab="home" href="/home">
                 <div className="icon-selected" style={STYLES}>
                   <HomeIcon />

@@ -8,9 +8,22 @@ const Container = styled.div`
     margin: 0 5px;
 `;
 
-const BookList = () => {
+const TitleContainer = styled.div`
+    margin-left: 10px;
+`;
+
+interface IProps {
+    title?: React.ReactNode
+}
+
+const BookList: React.FC<IProps> = ({ title }) => {
     return (
         <Container>
+            {title && (
+                <TitleContainer>
+                    {title}
+                </TitleContainer>
+            )}
             <IonGrid>
                 <IonRow>
                     {BooksTestData.map((book) => (
