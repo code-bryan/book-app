@@ -25,7 +25,7 @@ const Home: React.FC<IProps> = ({ history }) => {
 
   return (
     <DashboardTemplate
-        toolbar={<SearchToolbar />}
+        toolbar={<SearchToolbar title="Hola, Bryan Astacio" />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
         bookList={<BookList books={BooksTestData} />}
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}

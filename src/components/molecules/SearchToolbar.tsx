@@ -16,9 +16,13 @@ const SearchInputContainer = styled.div`
     margin: 15px 0;
 `;
 
-const SearchToolbar: React.FC = () => (
+interface IProps {
+    title: string;
+}
+
+const SearchToolbar: React.FC<IProps> = ({ title }) => (
     <>
-        <Text color="secondary" size={22} weight={500}>Hola, Bryan Astacio</Text>
+        <Text color="secondary" size={22} weight={500}>{title}</Text>
         <SearchInputContainer>
             <SearchInput placeholder="Libro, Autor o Colleción" />
         </SearchInputContainer>

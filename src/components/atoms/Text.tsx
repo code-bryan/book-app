@@ -5,6 +5,8 @@ import Colors from 'theme/Colors';
 
 interface IProps extends GenericProps {
     width?: string;
+    whiteSpace?: "none" | "nowrap";
+    align?: "start" | "center";
 }
 
 const TextContainer: React.FC<IProps> = styled.span`
@@ -13,9 +15,9 @@ const TextContainer: React.FC<IProps> = styled.span`
     font-weight: ${(props: IProps) => props.weight};
     width: ${(props: IProps) => props.width};
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: ${(props: IProps) => props.whiteSpace};
     overflow: hidden;
-    text-align: start;
+    text-align: ${(props: IProps) => props.align};
 `;
 
 const Text: React.FC<IProps> = ({ children, ...props }) => (
@@ -28,7 +30,9 @@ Text.defaultProps = {
     color: 'primary',
     size: 20,
     weight: 'normal',
-    width: 'auto'
+    width: 'auto',
+    whiteSpace: 'nowrap',
+    align: 'start',
 }
 
 export default Text;

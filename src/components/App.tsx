@@ -29,6 +29,7 @@ import Discover from './pages/home/Discover';
 import Register from './pages/authentication/Register';
 import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
+import Search from './pages/search/Search';
 
 const App: React.FC = () => (
   <IonApp>
@@ -39,7 +40,9 @@ const App: React.FC = () => (
             <Route path="/home" component={Home} exact={true} />
             <Route path="/new-books" component={NewBookList} exact={true} />
             <Route path='/discover' component={Discover} exact={true} />
-            
+
+            {/* search routes */}
+            <Route path="/search" component={Search} exact={true} />
 
             {/* authentication routes */}
             <Route path="/login" component={Login} exact={true} />
@@ -56,7 +59,7 @@ const App: React.FC = () => (
                 </div>
               </IonTabButton>
 
-              <IonTabButton tab="asd" href="/asd">
+              <IonTabButton tab="search" href="/search">
                 <div className="icon-selected">
                   <SearchIcon />
                 </div>
