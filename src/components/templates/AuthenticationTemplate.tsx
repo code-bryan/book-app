@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
+import { IonContent, IonPage } from '@ionic/react';
 import AuthenticationToolbar from 'components/molecules/AuthenticationToolbar';
 import React from 'react';
 import styled from 'styled-components';

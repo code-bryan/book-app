@@ -7,17 +7,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    /* margin: 0 5px; */
+    margin: 0 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const CollectionList = () => {
     return (
         <Container>
-            <IonGrid>
+            <IonGrid style={{ width: '100%' }}>
                 <IonRow>
                     {CollectionTestData.map((collection) => (
                         <IonCol size="6" key={collection.id}>
-                            <CollectionInformation data={collection} width={150} height={160} />
+                            <CollectionInformation data={collection} width={140} height={150} />
                         </IonCol>
                     ))}
                 </IonRow>

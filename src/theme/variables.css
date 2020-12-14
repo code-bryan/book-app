@@ -236,3 +236,9 @@ http://ionicframework.com/docs/theming/ */
 /* ion-content {
   --overflow: hidden;
 } */
+
+ion-tab-bar {
+  --background: #2bd1b8;
+  color: #3f3d56;
+  --color-selected: #000;
+}

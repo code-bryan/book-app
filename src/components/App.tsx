@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import {Home as HomeIcon, Search as SearchIcon, Bookmark, Settings as SettingIcons} from 'react-feather';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,21 +33,40 @@ import Login from './pages/authentication/Login';
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        {/* home routes */}
-        <Route path="/home" component={Home} exact={true} />
-        <Route path="/new-books" component={NewBookList} exact={true} />
-        <Route path='/discover' component={Discover} exact={true} />
-        
+      <IonTabs>
+          <IonRouterOutlet>
+            {/* home routes */}
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/new-books" component={NewBookList} exact={true} />
+            <Route path='/discover' component={Discover} exact={true} />
+            
 
-        {/* authentication routes */}
-        <Route path="/login" component={Login} exact={true} />
-        <Route path="/register" component={Register} exact={true} />
-        <Route path="/recover-password" component={RecoverPassword} exact={true} />
+            {/* authentication routes */}
+            <Route path="/login" component={Login} exact={true} />
+            <Route path="/register" component={Register} exact={true} />
+            <Route path="/recover-password" component={RecoverPassword} exact={true} />
 
-        {/* default */}
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-      </IonRouterOutlet>
+            {/* default */}
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+              <IonTabButton tab="home" href="/home">
+                  <HomeIcon />
+              </IonTabButton>
+
+              <IonTabButton tab="asd" href="/asd">
+                  <SearchIcon />
+              </IonTabButton>
+
+              <IonTabButton tab="asd" href="/asd">
+                  <Bookmark />
+              </IonTabButton>
+
+              <IonTabButton tab="asd" href="/asd">
+                  <SettingIcons />
+              </IonTabButton>
+          </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );
