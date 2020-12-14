@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {Home as HomeIcon, Search as SearchIcon, Bookmark, Settings as SettingIcons} from 'react-feather';
 
@@ -31,6 +31,8 @@ import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
 import Search from './pages/search/Search';
 
+const STYLES = { width: isPlatform('ios') ? '48%' : '85%' };
+
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -54,25 +56,25 @@ const App: React.FC = () => (
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
-                <div className="icon-selected">
+                <div className="icon-selected" style={STYLES}>
                   <HomeIcon />
                 </div>
               </IonTabButton>
 
               <IonTabButton tab="search" href="/search">
-                <div className="icon-selected">
+                <div className="icon-selected" style={STYLES}>
                   <SearchIcon />
                 </div>
               </IonTabButton>
 
               <IonTabButton tab="asd" href="/asd">
-                <div className="icon-selected">
+                <div className="icon-selected" style={STYLES}>
                   <Bookmark  />
                 </div> 
               </IonTabButton>
 
               <IonTabButton tab="asd" href="/asd">
-                <div className="icon-selected">
+                <div className="icon-selected" style={STYLES}>
                   <SettingIcons  />
                 </div>
               </IonTabButton>
