@@ -10,9 +10,10 @@ const Section = styled.div`
 interface IProps {
     bookDetails: React.ReactNode;
     bookDescription: React.ReactNode;
+    bookAction: React.ReactNode;
 }
 
-const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription }) => {
+const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription, bookAction }) => {
     return (
         <IonPage>
             <IonHeader>
@@ -28,6 +29,9 @@ const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription }) => {
                 </Section>
                 <Section>
                     {bookDescription}
+                </Section>
+                <Section>
+                    {bookAction}
                 </Section>
             </IonContent>
         </IonPage>
