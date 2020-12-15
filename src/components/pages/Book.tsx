@@ -1,19 +1,40 @@
-import ActionButton, { ActionButtonMode } from 'components/molecules/ActionButton';
 import BookDescription from 'components/molecules/BookDescription';
 import BookDetails from 'components/molecules/BookDetails';
 import BookAction from 'components/organisms/BookAction';
 import BookTemplate from 'components/templates/BookTemplate';
+import { IApplicationStore } from 'domain/application/Store';
+import { setActive } from 'domain/player/PlayerState';
 import React from 'react';
-import { Play } from 'react-feather';
+import { connect } from 'react-redux';
+import { RouteComponentProps, StaticContext } from 'react-router';
+import { Dispatch } from 'redux';
 
-const Book: React.FC = () => {
+interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
+    active: boolean;
+    setActive: (active: boolean) => void;
+}
+
+const Book: React.FC<IProps> = ({ active, setActive }) => {
+
+    const onPlayPressHandler = (active: boolean) => {
+        setActive(active);
+    };
+
     return (
         <BookTemplate
             bookDetails={<BookDetails />}
             bookDescription={<BookDescription />}
-            bookAction={<BookAction />}
+            bookAction={<BookAction onPlayPress={onPlayPressHandler} />}
         />
     );
 };
 
-export default Book;
+const mapStateToProps = (state: IApplicationStore) => ({
+    active: state.playerState.active
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    setActive: (active: boolean) => dispatch(setActive(active))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Book);

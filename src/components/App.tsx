@@ -31,59 +31,72 @@ import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
 import Search from './pages/search/Search';
 import Book from './pages/Book';
+import { Provider } from 'react-redux';
+import store from 'domain/application/Store';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-          <IonRouterOutlet>
-            {/* home routes */}
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/new-books" component={NewBookList} exact={true} />
-            <Route path='/discover' component={Discover} exact={true} />
-            <Route path="/home/book" component={Book} exact={true} />
+const App: React.FC = () => {
 
-            {/* search routes */}
-            <Route path="/search" component={Search} exact={true} />
-
-            {/* authentication routes */}
-            <Route path="/login" component={Login} exact={true} />
-            <Route path="/register" component={Register} exact={true} />
-            <Route path="/recover-password" component={RecoverPassword} exact={true} />
-
-            {/* default */}
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
-          </IonRouterOutlet>
-          <IonTabBar slot="bottom" style={{ height: '56px' }}>
-              <IonTabButton tab="home" href="/home">
-                <div className="icon-selected" style={STYLES}>
-                  <HomeIcon />
-                </div>
-              </IonTabButton>
-
-              <IonTabButton tab="search" href="/search">
-                <div className="icon-selected" style={STYLES}>
-                  <SearchIcon />
-                </div>
-              </IonTabButton>
-
-              <IonTabButton tab="asd" href="/asd">
-                <div className="icon-selected" style={STYLES}>
-                  <Bookmark  />
-                </div> 
-              </IonTabButton>
-
-              <IonTabButton tab="asd" href="/asd">
-                <div className="icon-selected" style={STYLES}>
-                  <SettingIcons  />
-                </div>
-              </IonTabButton>
-          </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+  React.useEffect(() => {
+    store.subscribe(() => {
+      console.log(store.getState());
+    });
+  }, []);
+  
+  return (
+    <Provider store={store}>
+        <IonApp>
+          <IonReactRouter>
+            <IonTabs>
+                <IonRouterOutlet>
+                  {/* home routes */}
+                  <Route path="/home" component={Home} exact={true} />
+                  <Route path="/new-books" component={NewBookList} exact={true} />
+                  <Route path='/discover' component={Discover} exact={true} />
+                  <Route path="/home/book" component={Book} exact={true} />
+  
+                  {/* search routes */}
+                  <Route path="/search" component={Search} exact={true} />
+  
+                  {/* authentication routes */}
+                  <Route path="/login" component={Login} exact={true} />
+                  <Route path="/register" component={Register} exact={true} />
+                  <Route path="/recover-password" component={RecoverPassword} exact={true} />
+  
+                  {/* default */}
+                  <Route exact path="/" render={() => <Redirect to="/home" />} />
+                </IonRouterOutlet>
+                <IonTabBar slot="bottom" style={{ height: '56px' }}>
+                    <IonTabButton tab="home" href="/home">
+                      <div className="icon-selected" style={STYLES}>
+                        <HomeIcon />
+                      </div>
+                    </IonTabButton>
+  
+                    <IonTabButton tab="search" href="/search">
+                      <div className="icon-selected" style={STYLES}>
+                        <SearchIcon />
+                      </div>
+                    </IonTabButton>
+  
+                    <IonTabButton tab="asd" href="/asd">
+                      <div className="icon-selected" style={STYLES}>
+                        <Bookmark  />
+                      </div> 
+                    </IonTabButton>
+  
+                    <IonTabButton tab="asd" href="/asd">
+                      <div className="icon-selected" style={STYLES}>
+                        <SettingIcons  />
+                      </div>
+                    </IonTabButton>
+                </IonTabBar>
+            </IonTabs>
+          </IonReactRouter>
+      </IonApp>
+    </Provider>
+  );
+};
 
 export default App;

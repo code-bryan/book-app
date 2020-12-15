@@ -1,6 +1,6 @@
 import ActionButton, { ActionButtonMode } from 'components/molecules/ActionButton';
 import React from 'react';
-import { Bookmark, Play } from 'react-feather';
+import { Bookmark, Pause, Play } from 'react-feather';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -10,11 +10,25 @@ const Container = styled.div`
     align-items:center;
 `;
 
-const BookAction = () => {
+interface IProps {
+    onPlayPress?: (active: boolean) => void;
+    onAddPress?: () => void;
+}
+
+const BookAction: React.FC<IProps> = ({ onPlayPress, onAddPress }) => {
+    const [playing, setPlaying] = React.useState<boolean>(false);
+
+    const onTapPlayHandler = () => {
+        setPlaying((current) => {
+            onPlayPress?.(!current)
+            return !current;
+        });
+    };
+
     return (
         <Container>
-            <ActionButton title="Escuchar" icon={<Play />} mode={ActionButtonMode.OUTLINE} />
-            <ActionButton title="Agregar" icon={<Bookmark />} />
+            <ActionButton title="Escuchar" icon={playing ? <Pause /> : <Play />} mode={ActionButtonMode.OUTLINE} onTap={onTapPlayHandler} />
+            <ActionButton title="Agregar" icon={<Bookmark />} onTap={() => onAddPress?.()} />
         </Container>
     );
 };

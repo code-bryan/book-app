@@ -45,11 +45,12 @@ interface IProps extends SharedProps {
     icon?: React.ReactNode;
     title: string;
     mode?: ActionButtonMode;
+    onTap?: () => void;
 }
 
-const ActionButton: React.FC<IProps> = ({ icon, title, mode, ...props }) => {
+const ActionButton: React.FC<IProps> = ({ icon, title, mode, onTap, ...props }) => {
     return (
-        <Button {...props} className={`${mode}`}>
+        <Button {...props} onClick={() => onTap?.()} className={`${mode}`}>
             {icon && (
                 <IconContainer>
                     {icon}
