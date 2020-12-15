@@ -26,10 +26,11 @@ const AuthorText = styled(Text)`
 
 interface IProps {
     book: Book;
+    onPress?: (id: string) => void;
 }
 
-const BookInformation: React.FC<IProps> = ({ book }) => (
-    <Container>
+const BookInformation: React.FC<IProps> = ({ book, onPress }) => (
+    <Container onClick={() => onPress?.(book.id)}>
         <Image src={book.image} />
         <TextContainer>
             <Text color="secondary" size={14} weight={500}>{book.name}</Text>

@@ -30,6 +30,7 @@ import Register from './pages/authentication/Register';
 import RecoverPassword from './pages/authentication/RecoverPassword';
 import Login from './pages/authentication/Login';
 import Search from './pages/search/Search';
+import Book from './pages/Book';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
@@ -42,6 +43,7 @@ const App: React.FC = () => (
             <Route path="/home" component={Home} exact={true} />
             <Route path="/new-books" component={NewBookList} exact={true} />
             <Route path='/discover' component={Discover} exact={true} />
+            <Route path="/book" component={Book} exact={true} />
 
             {/* search routes */}
             <Route path="/search" component={Search} exact={true} />

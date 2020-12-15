@@ -8,8 +8,6 @@ import CollectionTagList from 'components/organisms/search/CollectionTagList';
 import BookList from 'components/organisms/books/BookList';
 import Text from 'components/atoms/Text';
 
-
-
 const Search: React.FC<RouteComponentProps<any, StaticContext, unknown>> = () => {
     return (
         <SearchTemplate

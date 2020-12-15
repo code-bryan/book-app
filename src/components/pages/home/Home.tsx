@@ -23,11 +23,15 @@ const Home: React.FC<IProps> = ({ history }) => {
     history.push('/discover')
   }
 
+  const onBookPresHandler = (id: string) => {
+    history.push('/book');
+  };
+
   return (
     <DashboardTemplate
         toolbar={<SearchToolbar title="Hola, Bryan Astacio" />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
-        bookList={<BookList books={BooksTestData} />}
+        bookList={<BookList books={BooksTestData} onBookPress={onBookPresHandler} />}
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}

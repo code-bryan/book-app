@@ -12,7 +12,7 @@ const Container = styled.div`
     align-items: center;
     border-radius: 10px;
 
-    .active {
+    &.active {
         background: ${Colors.CATEGORY_ACTIVE_BACKGROUND};
     }
 `;

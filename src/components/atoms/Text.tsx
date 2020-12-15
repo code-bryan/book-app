@@ -5,7 +5,7 @@ import Colors from 'theme/Colors';
 
 interface IProps extends GenericProps {
     width?: string;
-    whiteSpace?: "none" | "nowrap";
+    whiteSpace?: "none" | "nowrap" | "break-spaces";
     align?: "start" | "center";
     onTap?: () => void;
 }
