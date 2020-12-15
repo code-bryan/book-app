@@ -43,7 +43,7 @@ const App: React.FC = () => (
             <Route path="/home" component={Home} exact={true} />
             <Route path="/new-books" component={NewBookList} exact={true} />
             <Route path='/discover' component={Discover} exact={true} />
-            <Route path="/book" component={Book} exact={true} />
+            <Route path="/home/book" component={Book} exact={true} />
 
             {/* search routes */}
             <Route path="/search" component={Search} exact={true} />

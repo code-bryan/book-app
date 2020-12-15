@@ -26,6 +26,10 @@ const DetailsContainer = styled.div`
 const Section = styled.div`
     padding: 20px 0;
 
+    &.small {
+        padding: 10px 0;
+    }
+
     &.underline {
         border-bottom: 0.5px solid #707070;
     }
@@ -35,15 +39,19 @@ const TextDate = styled.div`
     margin-bottom: 5px;
 `;
 
-const BookDetails: React.FC = () => {
+interface IProps {
+    actionButton?: React.ReactNode;
+}
+
+const BookDetails: React.FC<IProps> = ({ actionButton }) => {
     return (
         <Container>
             <ImageContainer>
-                <Image src={Img} height={175} width={135} />
+                <Image src={Img} height={170} width={135} />
             </ImageContainer>
            
             <DetailsContainer>
-                <Section className="underline">
+                <Section className={`underline ${actionButton ? "small" : ''}`} >
                     <Text size={18} color="secondary" weight={500} whiteSpace="break-spaces">
                         Por
                         <br />
@@ -52,12 +60,14 @@ const BookDetails: React.FC = () => {
                 </Section>
                 
 
-                <Section>
+                <Section className={actionButton ? "small" : '' }>
                     <TextDate>
                         <Text size={12} color="secondary"  weight={500} whiteSpace="none">Julio 25 de 2008</Text>
                     </TextDate>
                     <Text size={12} color="secondary"  weight={500} whiteSpace="none">Libreria Santo Thomas</Text>
                 </Section>
+
+                {actionButton && actionButton}
             </DetailsContainer>
         </Container>
     );

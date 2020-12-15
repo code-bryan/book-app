@@ -24,7 +24,7 @@ const Home: React.FC<IProps> = ({ history }) => {
   }
 
   const onBookPresHandler = (id: string) => {
-    history.push('/book');
+    history.push('/home/book');
   };
 
   return (
