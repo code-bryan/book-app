@@ -11,26 +11,16 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    onPlayPress?: (active: boolean) => void;
+    playing: boolean;
+    onPlayPress?: () => void;
     onAddPress?: () => void;
 }
 
-const BookAction: React.FC<IProps> = ({ onPlayPress, onAddPress }) => {
-    const [playing, setPlaying] = React.useState<boolean>(false);
-
-    const onTapPlayHandler = () => {
-        setPlaying((current) => {
-            onPlayPress?.(!current)
-            return !current;
-        });
-    };
-
-    return (
-        <Container>
-            <ActionButton title="Escuchar" icon={playing ? <Pause /> : <Play />} mode={ActionButtonMode.OUTLINE} onTap={onTapPlayHandler} />
-            <ActionButton title="Agregar" icon={<Bookmark />} onTap={() => onAddPress?.()} />
-        </Container>
-    );
-};
+const BookAction: React.FC<IProps> = ({ playing, onPlayPress, onAddPress }) => (
+    <Container>
+        <ActionButton title="Escuchar" icon={playing ? <Pause /> : <Play />} mode={ActionButtonMode.OUTLINE} onTap={() => onPlayPress?.()} />
+        <ActionButton title="Agregar" icon={<Bookmark />} onTap={() => onAddPress?.()} />
+    </Container>
+);
 
 export default BookAction;

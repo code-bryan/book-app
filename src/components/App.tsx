@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
+import { IonApp, IonModal, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {Home as HomeIcon, Search as SearchIcon, Bookmark, Settings as SettingIcons} from 'react-feather';
 
@@ -33,14 +33,18 @@ import Search from './pages/search/Search';
 import Book from './pages/Book';
 import { Provider } from 'react-redux';
 import store from 'domain/application/Store';
+import { IPlayerState } from 'domain/player/PlayerState';
+import Player from './pages/Player';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
 const App: React.FC = () => {
+  const [showPlayer, setShowPlayer] = React.useState(false);
 
   React.useEffect(() => {
     store.subscribe(() => {
-      console.log(store.getState());
+      const state = store.getState().playerState as IPlayerState;
+      setShowPlayer(state.active);
     });
   }, []);
   
@@ -67,6 +71,11 @@ const App: React.FC = () => {
                   {/* default */}
                   <Route exact path="/" render={() => <Redirect to="/home" />} />
                 </IonRouterOutlet>
+
+                <IonModal isOpen={showPlayer}>
+                  <Player />
+                </IonModal>
+
                 <IonTabBar slot="bottom" style={{ height: '56px' }}>
                     <IonTabButton tab="home" href="/home">
                       <div className="icon-selected" style={STYLES}>

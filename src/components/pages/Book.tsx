@@ -16,15 +16,15 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
 
 const Book: React.FC<IProps> = ({ active, setActive }) => {
 
-    const onPlayPressHandler = (active: boolean) => {
-        setActive(active);
+    const onPlayPressHandler = () => {
+        setActive(!active);
     };
 
     return (
         <BookTemplate
             bookDetails={<BookDetails />}
             bookDescription={<BookDescription />}
-            bookAction={<BookAction onPlayPress={onPlayPressHandler} />}
+            bookAction={<BookAction playing={active} onPlayPress={onPlayPressHandler} />}
         />
     );
 };
