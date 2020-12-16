@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonModal, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
+import { IonApp, IonContent, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {Home as HomeIcon, Search as SearchIcon, Bookmark, Settings as SettingIcons} from 'react-feather';
 
@@ -33,76 +33,65 @@ import Search from './pages/search/Search';
 import Book from './pages/Book';
 import { Provider } from 'react-redux';
 import store from 'domain/application/Store';
-import { IPlayerState } from 'domain/player/PlayerState';
 import Player from './pages/Player';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
 const App: React.FC = () => {
-  const [showPlayer, setShowPlayer] = React.useState(false);
-
-  React.useEffect(() => {
-    store.subscribe(() => {
-      const state = store.getState().playerState as IPlayerState;
-      setShowPlayer(state.active);
-    });
-  }, []);
-  
   return (
     <Provider store={store}>
         <IonApp>
-          <IonReactRouter>
-            <IonTabs>
-                <IonRouterOutlet>
-                  {/* home routes */}
-                  <Route path="/home" component={Home} exact={true} />
-                  <Route path="/new-books" component={NewBookList} exact={true} />
-                  <Route path='/discover' component={Discover} exact={true} />
-                  <Route path="/home/book" component={Book} exact={true} />
-  
-                  {/* search routes */}
-                  <Route path="/search" component={Search} exact={true} />
-  
-                  {/* authentication routes */}
-                  <Route path="/login" component={Login} exact={true} />
-                  <Route path="/register" component={Register} exact={true} />
-                  <Route path="/recover-password" component={RecoverPassword} exact={true} />
-  
-                  {/* default */}
-                  <Route exact path="/" render={() => <Redirect to="/home" />} />
-                </IonRouterOutlet>
+          <IonContent>
+            <Player />
+            <IonReactRouter>
+              <IonTabs>
+                  <IonRouterOutlet>
+                    {/* home routes */}
+                    <Route path="/home" component={Home} exact={true} />
+                    <Route path="/new-books" component={NewBookList} exact={true} />
+                    <Route path='/discover' component={Discover} exact={true} />
+                    <Route path="/home/book" component={Book} exact={true} />
+    
+                    {/* search routes */}
+                    <Route path="/search" component={Search} exact={true} />
+    
+                    {/* authentication routes */}
+                    <Route path="/login" component={Login} exact={true} />
+                    <Route path="/register" component={Register} exact={true} />
+                    <Route path="/recover-password" component={RecoverPassword} exact={true} />
+    
+                    {/* default */}
+                    <Route exact path="/" render={() => <Redirect to="/home" />} />
+                  </IonRouterOutlet>
 
-                <IonModal isOpen={showPlayer}>
-                  <Player />
-                </IonModal>
-
-                <IonTabBar slot="bottom" style={{ height: '56px' }}>
-                    <IonTabButton tab="home" href="/home">
-                      <div className="icon-selected" style={STYLES}>
-                        <HomeIcon />
-                      </div>
-                    </IonTabButton>
-  
-                    <IonTabButton tab="search" href="/search">
-                      <div className="icon-selected" style={STYLES}>
-                        <SearchIcon />
-                      </div>
-                    </IonTabButton>
-  
-                    <IonTabButton tab="asd" href="/asd">
-                      <div className="icon-selected" style={STYLES}>
-                        <Bookmark  />
-                      </div> 
-                    </IonTabButton>
-  
-                    <IonTabButton tab="asd" href="/asd">
-                      <div className="icon-selected" style={STYLES}>
-                        <SettingIcons  />
-                      </div>
-                    </IonTabButton>
-                </IonTabBar>
-            </IonTabs>
-          </IonReactRouter>
+                  <IonTabBar slot="bottom" style={{ height: '56px' }}>
+                      <IonTabButton tab="home" href="/home">
+                        <div className="icon-selected" style={STYLES}>
+                          <HomeIcon />
+                        </div>
+                      </IonTabButton>
+    
+                      <IonTabButton tab="search" href="/search">
+                        <div className="icon-selected" style={STYLES}>
+                          <SearchIcon />
+                        </div>
+                      </IonTabButton>
+    
+                      <IonTabButton tab="asd" href="/asd">
+                        <div className="icon-selected" style={STYLES}>
+                          <Bookmark  />
+                        </div> 
+                      </IonTabButton>
+    
+                      <IonTabButton tab="asd" href="/asd">
+                        <div className="icon-selected" style={STYLES}>
+                          <SettingIcons  />
+                        </div>
+                      </IonTabButton>
+                  </IonTabBar>
+              </IonTabs>
+            </IonReactRouter>
+          </IonContent>
       </IonApp>
     </Provider>
   );
