@@ -27,6 +27,10 @@ const Home: React.FC<IProps> = ({ history }) => {
     history.push('/home/book');
   };
 
+  const onCollectionListHandler = (id: string) => {
+    history.push("/home/collection");
+  };
+
   return (
     <DashboardTemplate
         toolbar={<SearchToolbar title="Hola, Bryan Astacio" />}
@@ -35,7 +39,7 @@ const Home: React.FC<IProps> = ({ history }) => {
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}
-        collectionList={<HorizontalCollectionList collections={CollectionTestData} />}
+        collectionList={<HorizontalCollectionList collections={CollectionTestData} onCollectionPress={onCollectionListHandler} />}
     />
   );
 };

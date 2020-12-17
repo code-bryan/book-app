@@ -1,5 +1,5 @@
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
-import CollectionInformation from 'components/molecules/CollectionInformation';
+import CollectionInformation from 'components/organisms/CollectionInformation';
 import CollectionTestData from 'domain/books/test/CollectionTestData';
 import React from 'react';
 import styled from 'styled-components';

@@ -1,14 +1,19 @@
 import FilterButton from 'components/molecules/FilterButton';
-import CollectionList from 'components/organisms/books/CollectionList';
+import CollectionsList from 'components/organisms/books/CollectionList';
 import GenericToolbarContent from 'components/organisms/GenericToolbarContent';
-import CollectionTemplate from 'components/templates/CollectionTemplate';
+import CollectionsTemplate from 'components/templates/CollectionsTemplate';
 import React from 'react';
+import { RouteComponentProps, StaticContext } from 'react-router';
 
-const Discover: React.FC = () => {
+interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
+
+}
+
+const Discover: React.FC<IProps> = ({ history }) => {
     return (
-        <CollectionTemplate
+        <CollectionsTemplate
             toolbar={<GenericToolbarContent title={"Descubre"} button={<FilterButton />} />}
-            list={<CollectionList />}
+            list={<CollectionsList />}
         />
     );
 }

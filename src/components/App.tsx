@@ -34,6 +34,7 @@ import Book from './pages/Book';
 import { Provider } from 'react-redux';
 import store from 'domain/application/Store';
 import Player from './pages/Player';
+import Collection from './pages/Collection';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
@@ -51,6 +52,7 @@ const App: React.FC = () => {
                     <Route path="/new-books" component={NewBookList} exact={true} />
                     <Route path='/discover' component={Discover} exact={true} />
                     <Route path="/home/book" component={Book} exact={true} />
+                    <Route path="/home/collection" component={Collection} exact={true} />
     
                     {/* search routes */}
                     <Route path="/search" component={Search} exact={true} />
