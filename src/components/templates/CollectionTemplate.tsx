@@ -1,11 +1,8 @@
 import { IonContent, IonPage } from '@ionic/react';
 import Text from 'components/atoms/Text';
-import CollectionQuote from 'components/molecules/CollectionQuote';
 import CollectionToolbar from 'components/organisms/CollectionToolbar';
 import React from 'react';
 import styled from 'styled-components';
-
-
 
 const Section = styled.div`
     margin: 10px 15px 0;
@@ -23,10 +20,11 @@ interface IProps {
     title: React.ReactNode;
     bookListTitle: React.ReactNode;
     bookList: React.ReactNode;
+    quotes: React.ReactNode;
     imageHeight: number;
 }
 
-const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, bookList, imageHeight }) => {
+const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, bookList, quotes, imageHeight }) => {
     const [scroll, setScroll] = React.useState<number>(0);
     
     return (
@@ -54,9 +52,7 @@ const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, boo
                 </Section>
 
                 <Section>
-                    <CollectionQuote big>{"Inspirarse"}</CollectionQuote>
-                    <CollectionQuote big>{"Aprender"}</CollectionQuote>
-                    <CollectionQuote big>{"Recuentos de la vida"}</CollectionQuote>
+                    {quotes}
                 </Section>
                 
                 <Section>

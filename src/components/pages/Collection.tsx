@@ -4,6 +4,7 @@ import React from 'react';
 import { RouteComponentProps, StaticContext } from 'react-router';
 import Text from 'components/atoms/Text';
 import Image from 'components/atoms/Image';
+import CollectionQuote from 'components/molecules/CollectionQuote';
 
 const Img = require('assets/images/big-collection-image.png');
 
@@ -19,6 +20,13 @@ const Collection: React.FC<IProps> = () => {
             title={<Text color="secondary" weight={"bold"}>Ideas - Libros motivaciones</Text>}
             image={<Image src={Img} width={window.innerWidth} height={imageHeight.current} />}
             bookListTitle={<Text color="secondary" weight={500}>Libros</Text>}
+            quotes={
+                <>
+                    <CollectionQuote big>{"Inspirarse"}</CollectionQuote>
+                    <CollectionQuote big>{"Aprender"}</CollectionQuote>
+                    <CollectionQuote big>{"Recuentos de la vida"}</CollectionQuote>
+                </>
+            }
             bookList={<BookList />}
             imageHeight={imageHeight.current}
         />
