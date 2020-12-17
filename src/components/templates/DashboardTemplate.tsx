@@ -31,9 +31,11 @@ interface IProps {
 
     discoverTitle: React.ReactNode;
     collectionList: React.ReactNode;
+
+    library?: boolean;
 }
 
-const DashboardTemplate: React.FC<IProps> = ({ toolbar, booksTitle, bookList, categoriesTitle, categoryList,  discoverTitle, collectionList }) => {
+const DashboardTemplate: React.FC<IProps> = ({ toolbar, booksTitle, bookList, categoriesTitle, categoryList,  discoverTitle, collectionList, library }) => {
 
     return (
         <IonPage> 
@@ -50,20 +52,24 @@ const DashboardTemplate: React.FC<IProps> = ({ toolbar, booksTitle, bookList, ca
 
                 <Section>
                     <SectionInformationContainer>
-                        {categoriesTitle}
+                        {library ? discoverTitle : categoriesTitle}
                     </SectionInformationContainer>
-                    {categoryList}
+                    {library ? collectionList : categoryList}
                 </Section>
 
                 <LastSection>
                     <SectionInformationContainer>
-                        {discoverTitle}
+                        {library ? categoriesTitle : discoverTitle}
                     </SectionInformationContainer>
-                    {collectionList}
+                    {library ? categoryList : collectionList}
                 </LastSection>
             </Container>
         </IonPage>
     );
 };
+
+DashboardTemplate.defaultProps = {
+    library: false
+}
 
 export default DashboardTemplate;
