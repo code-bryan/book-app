@@ -6,7 +6,7 @@ import React from 'react';
 const FormProfile = () => {
     return (
         <FormProfileTemplate
-            toolbar={<GenericToolbarContent title="Bryan Astacio" />}
+            toolbar={<GenericToolbarContent title="Configurar perfil" />}
             form={<ProfileForm />}
         />
     )

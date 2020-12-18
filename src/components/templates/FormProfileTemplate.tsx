@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Section = styled.div`
-    margin: 25px 15px;
+    margin: 5px 15px;
 `;
 
 interface IProps {
