@@ -14,18 +14,22 @@ const ButtonContainer = styled.div`
     margin-top: 40px;
 `;
 
-const RegisterForm: React.FC = () => {
+interface IProps {
+    onSubmit?: (values: RegisterRequest) => void; 
+}
+
+const RegisterForm: React.FC<IProps> = ({ onSubmit }) => {
     const [value] = React.useState(new RegisterRequest('', '', '', ''));
 
     const onSubmitHandler = (values: RegisterRequest) => {
-        console.log(values)
+        onSubmit?.(values);
     };
 
     return (
         <Formik initialValues={value} validationSchema={RegisterValidator} onSubmit={onSubmitHandler}>
             <StyledForm>
                 <FormField name="name" placeholder="Nombre"  />
-                <FormField name="lastname" type="email" placeholder="Apellido"  />
+                <FormField name="lastname" placeholder="Apellido"  />
                 <FormField name="email" type="email" placeholder="Correo electrónico"  />
                 <FormField name="password" type="password" placeholder="Contraseña" />
                 

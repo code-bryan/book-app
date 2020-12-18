@@ -8,6 +8,7 @@ const Toolbar = styled(IonToolbar)`
     --border-style: none;
     --box-shadow: none;
     --padding-top: ${isPlatform('ios') ? 15 : 25}px;
+    padding: 0 10px;
 `;
 
 const AuthenticationToolbar: React.FC = ({ children }) => (

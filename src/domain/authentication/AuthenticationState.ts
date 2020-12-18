@@ -2,6 +2,7 @@ import { IAction } from "domain/application/interface/IAction";
 import { Dispatch } from "redux";
 import User from "./entities/User";
 import LoginRequest from "./senders/LoginRequest";
+import RegisterRequest from "./senders/RegisterRequest";
 import AuthenticationService from "./services/AuthenticationService";
 
 export enum AuthenticationActions {
@@ -90,5 +91,16 @@ export const logout = (): any => async (dispatch: Dispatch<IAction>) => {
     }
 }
 
+export const registration = (registration: RegisterRequest): any => async (dispatch: Dispatch<IAction>) => {
+    try {
+        dispatch(userLoading(true));
+        const user = await service.register(registration);
+        dispatch(setCurrentUser(user));
+    } catch (e) {
+        dispatch(failAuthenticating());
+    } finally {
+        dispatch(userLoading(false));
+    }
+}
 
 export default reducer;
