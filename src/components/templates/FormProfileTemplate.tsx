@@ -9,10 +9,10 @@ const Section = styled.div`
 
 interface IProps {
     toolbar: React.ReactNode;
-    options: React.ReactNode;
+    form: React.ReactNode;
 }
 
-const ProfileTemplate: React.FC<IProps> = ({ toolbar, options }) => {
+const FormProfileTemplate: React.FC<IProps> = ({ toolbar, form }) => {
     return (
         <IonPage>
             <GenericToolbar>
@@ -20,11 +20,11 @@ const ProfileTemplate: React.FC<IProps> = ({ toolbar, options }) => {
             </GenericToolbar>
             <IonContent>
                 <Section>
-                    {options}
+                    {form}
                 </Section>
             </IonContent>
         </IonPage>
     );
 };
 
-export default ProfileTemplate;
+export default FormProfileTemplate;

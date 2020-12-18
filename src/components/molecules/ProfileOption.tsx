@@ -21,7 +21,7 @@ const IconSection = styled.div`
 
 const Icon = styled.div`
     margin-right: 5px;
-    margin-top: 1px;
+    margin-top: 5px;
 `;
 
 interface IProps {

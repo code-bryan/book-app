@@ -3,7 +3,10 @@ import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Colors from 'theme/Colors';
 
-type IProps = GenericProps & InputHTMLAttributes<HTMLInputElement>;
+type TypeProps = GenericProps & InputHTMLAttributes<HTMLInputElement>; 
+interface IProps extends TypeProps {
+    border?: boolean;
+}
 
 const StyledInput: React.FC<IProps> = styled.input`
     border-radius: 5px;
@@ -16,23 +19,29 @@ const StyledInput: React.FC<IProps> = styled.input`
     padding-left: 15px;
     outline: none;
 
+    &.border {
+        border: 2px solid ${Colors.SECONDARY};
+        height: 38px;
+    }
+
     &::placeholder {
         font-size: ${(props:  GenericProps) => props.size}px;
         font-weight: ${(props: GenericProps) => props.weight};
     }
 `;
 
-const Input: React.FC<IProps> = ({ ...props }) => {
+const Input: React.FC<IProps> = ({ border,...props }) => {
 
     return (
-        <StyledInput {...props} />
+        <StyledInput className={border ? 'border' : ''} {...props} />
     );
 }
 
 Input.defaultProps = {
     size: 15,
     weight: 500,
-    color: 'primary'
+    color: 'primary',
+    border: false,
 };
 
 export default Input;

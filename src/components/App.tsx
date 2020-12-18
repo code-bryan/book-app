@@ -40,6 +40,7 @@ import Library from './pages/library/Library';
 import MyBooks from './pages/library/MyBooks';
 import MyDiscover from './pages/library/MyDiscover';
 import Profile from './pages/profile/Profile';
+import FormProfile from './pages/profile/FormProfile';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
@@ -68,6 +69,7 @@ const App: React.FC = () => {
 
                     {/* profile routes */}
                     <Route path="/profile" component={Profile} exact={true} />
+                    <Route path="/profile/configuration" component={FormProfile} exact={true} />
 
                     {/* search routes */}
                     <Route path="/search" component={Search} exact={true} />

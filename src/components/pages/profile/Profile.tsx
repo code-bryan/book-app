@@ -3,14 +3,19 @@ import GenericToolbarContent from 'components/organisms/GenericToolbarContent';
 import ProfileTemplate from 'components/templates/ProfileTemplate';
 import React from 'react';
 import { Lock, LogOut, User } from 'react-feather';
+import { RouteComponentProps, StaticContext } from 'react-router';
 
-const Profile = () => {
+const Profile : React.FC<RouteComponentProps<any, StaticContext, unknown>> = ({ history }) => {
+    const onProfilePressHandler = () => {
+        history.push('/profile/configuration');
+    };
+
     return (
         <ProfileTemplate
             toolbar={<GenericToolbarContent title="Bryan Astacio" />}
             options={
                 <>
-                    <ProfileOption icon={<User size={20} />} title="Configurar Perfil" />
+                    <ProfileOption icon={<User size={20} />} title="Configurar Perfil" onPress={onProfilePressHandler} />
                     <ProfileOption icon={<Lock size={20} />} title="Cambiar Contraseña" />
                     <ProfileOption icon={<LogOut size={20} />} title="Cerrar Sesión" />
                 </>

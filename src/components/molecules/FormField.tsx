@@ -1,4 +1,5 @@
 import Input from 'components/atoms/Input';
+import Text from 'components/atoms/Text';
 import { GenericProps } from 'domain/generic-ui/GenericProps';
 import { FieldConfig, useField } from 'formik';
 import React from 'react';
@@ -6,6 +7,8 @@ import styled from 'styled-components';
 
 interface IProps extends GenericProps, FieldConfig<any> {
     placeholder?: string;
+    border?: boolean;
+    title?: string;
 }
 
 const Field = styled.div`
@@ -13,12 +16,22 @@ const Field = styled.div`
     width: 100%;
 `;
 
-const FormField: React.FC<IProps> = ({ weight, color, size, placeholder, ...props }) => {
+const TextContainer = styled.div`
+    margin-bottom: 5px;
+`;
+
+const FormField: React.FC<IProps> = ({ weight, color, size, placeholder, border, title, ...props }) => {
     const [field] = useField(props);
     
     return (
         <Field>
+            {title && (
+                <TextContainer>
+                    <Text color="secondary" size={16} weight="bold">{title}</Text>
+                </TextContainer>
+            )}
             <Input 
+                border={border}
                 weight={weight} 
                 color={color} 
                 size={size}
@@ -33,7 +46,8 @@ const FormField: React.FC<IProps> = ({ weight, color, size, placeholder, ...prop
 FormField.defaultProps = {
     size: 15,
     weight: 500,
-    color: 'primary'
+    color: 'primary',
+    border: false,
 };
 
 export default FormField;
