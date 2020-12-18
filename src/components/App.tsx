@@ -39,6 +39,7 @@ import Collection from './pages/Collection';
 import Library from './pages/library/Library';
 import MyBooks from './pages/library/MyBooks';
 import MyDiscover from './pages/library/MyDiscover';
+import Profile from './pages/profile/Profile';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
@@ -64,6 +65,9 @@ const App: React.FC = () => {
                     <Route path='/my-discover' component={MyDiscover} exact={true} />
                     <Route path="/library/book" component={Book} exact={true} />
                     <Route path="/library/collection" component={Collection} exact={true} />
+
+                    {/* profile routes */}
+                    <Route path="/profile" component={Profile} exact={true} />
 
                     {/* search routes */}
                     <Route path="/search" component={Search} exact={true} />
@@ -96,7 +100,7 @@ const App: React.FC = () => {
                         </div> 
                       </IonTabButton>
     
-                      <IonTabButton tab="asd" href="/asd">
+                      <IonTabButton tab="profile" href="/profile">
                         <div className="icon-selected" style={STYLES}>
                           <SettingIcons  />
                         </div>
