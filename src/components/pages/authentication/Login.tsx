@@ -51,8 +51,6 @@ const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAut
     }
   }, [user])
 
-  console.log(user);
-
   return (
     <>
       <IonLoading isOpen={loadingUser} message="Porfavor espere..." translucent  backdropDismiss={false} />

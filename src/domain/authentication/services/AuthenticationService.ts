@@ -42,4 +42,8 @@ export default class AuthenticationService extends FirebaseService {
         
         return User.fromFirebase(user);
     }
+
+    async forgotPassword(email: string): Promise<void> {
+        await this.auth.sendPasswordResetEmail(email);
+    }
 }
