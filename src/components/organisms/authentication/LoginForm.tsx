@@ -15,15 +15,14 @@ const ButtonContainer = styled.div`
 `;
 
 interface IProps {
-    onLogin?: () => void;
+    onLogin?: (values: LoginRequest) => void;
 }
 
 const LoginForm: React.FC<IProps> = ({ onLogin }) => {
     const [value] = React.useState(new LoginRequest('', ''));
 
     const onSubmitHandler = (values: LoginRequest) => {
-        console.log(values);
-        onLogin?.();
+        onLogin?.(values);
     };
 
     return (

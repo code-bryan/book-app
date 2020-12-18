@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonContent, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
+import { IonAlert, IonApp, IonContent, IonLoading, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {Home as HomeIcon, Search as SearchIcon, Bookmark, Settings as SettingIcons} from 'react-feather';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from 'domain/application/Store';
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,15 +41,28 @@ import MyBooks from './pages/library/MyBooks';
 import MyDiscover from './pages/library/MyDiscover';
 import Profile from './pages/profile/Profile';
 import FormProfile from './pages/profile/FormProfile';
+import User from 'domain/authentication/entities/User';
 
 const STYLES = { width: isPlatform('ios') ? '48px' : '50px' };
 
-const App: React.FC = () => {
+const App: React.FC<any> = ({ ...props }) => {
+  const [user, setUser] = React.useState<User|undefined>(undefined);
+  
+
+  React.useEffect(() => {
+    store.subscribe(() => {
+      const { authenticationState } = store.getState();
+      setUser(authenticationState.user);
+    });
+  }, []);
+
+
   return (
     <Provider store={store}>
         <IonApp>
           <IonContent>
             <Player />
+            
             <IonReactRouter>
               <IonTabs>
                   <IonRouterOutlet>
@@ -80,10 +93,10 @@ const App: React.FC = () => {
                     <Route path="/recover-password" component={RecoverPassword} exact={true} />
     
                     {/* default */}
-                    <Route exact path="/" render={() => <Redirect to="/home" />} />
+                    <Route exact path="/" render={() => <Redirect to="/login" />} />
                   </IonRouterOutlet>
 
-                  <IonTabBar slot="bottom" style={{ height: '56px' }}>
+                  <IonTabBar slot="bottom" style={{ display: user ? 'flex' : 'none', height:  '56px' }}>
                       <IonTabButton tab="home" href="/home">
                         <div className="icon-selected" style={STYLES}>
                           <HomeIcon />

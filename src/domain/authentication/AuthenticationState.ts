@@ -43,7 +43,7 @@ const service = new AuthenticationService();
 export const userLoading = (isLoading: boolean): IAction => ({ type: AuthenticationActions.LOADING_USER, payload: isLoading });
 export const setCurrentUser = (currentUser: User): IAction => ({ type: AuthenticationActions.AUTHENTICATE, payload: currentUser });
 export const failAuthenticating = (): IAction => ({ type: AuthenticationActions.FAIL_AUTHENTICATING, payload: null });
-export const login = (credentials: LoginRequest) => async (dispath: Dispatch<IAction>) => {
+export const login = (credentials: LoginRequest): any => async (dispath: Dispatch<IAction>) => {
     try {
         dispath(userLoading(true));
         const user = await service.login(credentials);
