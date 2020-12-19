@@ -20,6 +20,7 @@
     "formik": "^2.2.6",
     "framer-motion": "^2.9.5",
     "ionicons": "^5.0.0",
+    "moment": "^2.29.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-feather": "^2.0.9",

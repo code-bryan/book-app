@@ -13,8 +13,7 @@ export default class BookService extends BookBaseService {
 
     async find(id: string): Promise<Book> {
         const snapshot = await this.firestore.collection(this.Reference).doc(id).get(); 
-        const { name, authors, categories, image, description } = snapshot.data() as Book;
-        return new Book(snapshot.id, name, description, image, authors, categories);
+        return Book.fromFirestore(snapshot);
     }
 
     async findMultiples(ids: string[]): Promise<Book[]> {

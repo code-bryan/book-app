@@ -77,8 +77,8 @@ const App: React.FC<any> = ({ ...props }) => {
                     <Route path="/library" component={Library} exact={true} />
                     <Route path="/my-books" component={MyBooks} exact={true} />
                     <Route path='/my-discover' component={MyDiscover} exact={true} />
-                    <Route path="/library/book" component={Book} exact={true} />
-                    <Route path="/library/collection" component={Collection} exact={true} />
+                    <Route path="/library/book/:id" component={Book} exact={true} />
+                    <Route path="/library/collection/:id" component={Collection} exact={true} />
 
                     {/* profile routes */}
                     <Route path="/profile" component={Profile} exact={true} />

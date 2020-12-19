@@ -32,12 +32,12 @@ const Library: React.FC<IProps> = ({ history, user, library, loading, fetchLibra
     history.push('/my-discover')
   }
 
-  const onBookPresHandler = () => {
-    history.push('/library/book');
+  const onBookPresHandler = (id: string) => {
+    history.push(`/library/book/${id}`);
   };
 
-  const onCollectionListHandler = () => {
-    history.push("/library/collection");
+  const onCollectionListHandler = (id: string) => {
+    history.push(`/library/collection/${id}`);
   };
 
   React.useEffect(() => {

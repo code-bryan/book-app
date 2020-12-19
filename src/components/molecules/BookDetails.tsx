@@ -62,9 +62,9 @@ const BookDetails: React.FC<IProps> = ({ actionButton, book }) => {
 
                 <Section className={actionButton ? "small" : '' }>
                     <TextDate>
-                        <Text size={12} color="secondary"  weight={500} whiteSpace="none">Julio 25 de 2008</Text>
+                        <Text size={12} color="secondary"  weight={500} whiteSpace="none">{book.formatDate()}</Text>
                     </TextDate>
-                    <Text size={12} color="secondary"  weight={500} whiteSpace="none">Libreria Santo Thomas</Text>
+                    <Text size={12} color="secondary"  weight={500} whiteSpace="none">{book.publisher}</Text>
                 </Section>
 
                 {actionButton && actionButton}
