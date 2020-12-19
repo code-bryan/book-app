@@ -22,9 +22,10 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
     setActive: (active: boolean) => void;
     setMinimize: (minimize: boolean) => void;
     fetchBook: (id: string) => void;
+    clearBook: () => void;
 }
 
-const Book: React.FC<IProps> = ({ history, match, book, loading, fail, active, minimize, setActive, setMinimize, fetchBook }) => {
+const Book: React.FC<IProps> = ({ history, match, book, loading, fail, active, minimize, setActive, setMinimize, fetchBook, clearBook }) => {
     const onPlayPressHandler = () => {
         if (active) {
             setMinimize(!minimize)
@@ -43,6 +44,8 @@ const Book: React.FC<IProps> = ({ history, match, book, loading, fail, active, m
 
     React.useEffect(() => {
         fetchBook(match.params.id);
+
+        return () => clearBook();
     }, []);
 
     return (
@@ -74,7 +77,7 @@ const mapStateToProps = (state: IApplicationStore) => ({
     minimize: state.playerState.minimize,
     book: state.bookState.book,
     loading: state.bookState.loadingBook,
-    fail: state.bookState.failFetchingBook
+    fail: state.bookState.failFetchingBook,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

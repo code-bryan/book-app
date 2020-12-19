@@ -1,4 +1,5 @@
 import Image from 'components/atoms/Image';
+import Book from 'domain/books/entities/Book';
 import React from 'react';
 import { SkipBack, SkipForward } from 'react-feather';
 import styled from 'styled-components';
@@ -29,17 +30,17 @@ const Button = styled.div`
 `;
 
 interface IProps {
-
+    book: Book;
 }
 
-const PlayerUpperControls: React.FC<IProps> = () => {
+const PlayerUpperControls: React.FC<IProps> = ({ book }) => {
     return (
         <Container>
             <Button className="right">
                 <SkipBack size={25} />
             </Button>
             
-            <Image src={Img} width={160} height={210} />
+            <Image src={book.image} width={160} height={210} />
             
             <Button  className="left">
                 <SkipForward size={25} />
