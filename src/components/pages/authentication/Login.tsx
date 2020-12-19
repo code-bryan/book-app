@@ -9,19 +9,22 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps, StaticContext } from 'react-router';
 import LoginRequest from 'domain/authentication/senders/LoginRequest';
-import { login } from 'domain/authentication/AuthenticationState';
+import { login, setCurrentUser } from 'domain/authentication/AuthenticationState';
 import { IonAlert, IonLoading } from '@ionic/react';
 import User from 'domain/authentication/entities/User';
+import AuthenticationService from 'domain/authentication/services/AuthenticationService';
 
 interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
   user: User | undefined;
   loadingUser: boolean;
   failAuthenticating: boolean;
   setLogin: (credentials: LoginRequest) => void;
+  setUser: (user: User) => void;
 }
 
-const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAuthenticating }) => {
+const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAuthenticating, setUser }) => {
   const [fail, setFail] = React.useState<boolean>(false);
+  const [verifierRunning, setVerifierRunning] = React.useState<boolean>(false);
 
   const onDidDismissHandler = () => {
     setFail(false);
@@ -51,8 +54,24 @@ const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAut
     }
   }, [user])
 
+  React.useEffect(() => {
+    const verifier = async () => {
+      setVerifierRunning(true);
+      const user = await new AuthenticationService().verifyLogin();
+      console.log(user);
+      if (!user) return;
+      setUser(user);
+      setVerifierRunning(false);
+      history.push('/home');
+    };
+
+    verifier();
+    setVerifierRunning(false);
+  }, []);
+
   return (
     <>
+      <IonLoading isOpen={verifierRunning} message="Porfavor espere..." translucent  backdropDismiss={false} />
       <IonLoading isOpen={loadingUser} message="Porfavor espere..." translucent  backdropDismiss={false} />
       <IonAlert 
         isOpen={fail} 
@@ -88,7 +107,8 @@ const mapStateToProps = (state: IApplicationStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setLogin: (credentials: LoginRequest) => dispatch(login(credentials))
+  setLogin: (credentials: LoginRequest) => dispatch(login(credentials)),
+  setUser: (user: User) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

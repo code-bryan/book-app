@@ -15,8 +15,10 @@ export default class User {
 
     static fromFirebase(user: firebase.User): User {
         const { email, uid, displayName } = user;
+
         let name = '';
         let lastname = '';
+
         if (displayName) {
             const [n, ln] = user.displayName!.split(' ');
             name = n;
@@ -25,5 +27,10 @@ export default class User {
 
         
         return new User(uid, name, lastname, email!);
+    }
+
+    static fromStorage(value: string): User {
+        const { id, name, lastname, email } = JSON.parse(value) as User;
+        return new User(id, name, lastname, email)
     }
 }
