@@ -1,5 +1,6 @@
 import Book from "./Book";
 import Category from "./Category";
+import Collection from "./Collection";
 
 export default class Library {
     id: string;
@@ -7,6 +8,7 @@ export default class Library {
     collections: string[];
 
     booksList: Book[] = [];
+    collectionsList: Collection[] = [];
     categories: Category[] = [];
     
     constructor(id: string, books: string[], collections: string[]) {
@@ -23,5 +25,9 @@ export default class Library {
         let categories: Category[] = [];
         books.map((book) => [...categories, book.categories]);
         this.categories = categories.sort().filter((item, pos, ary) => !pos || item != ary[pos - 1]);
+    }
+
+    setCollections(collections: Collection[]): void {
+        this.collectionsList = collections;
     }
 }

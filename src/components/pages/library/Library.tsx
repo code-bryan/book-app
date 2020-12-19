@@ -5,17 +5,28 @@ import HorizontalCollectionList from 'components/organisms/books/HorizontalColle
 import GenericToolbarContent from 'components/organisms/GenericToolbarContent';
 import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
+import { IApplicationStore } from 'domain/application/Store';
+import { fetchLibrary } from 'domain/books/states/LibraryState';
 import BooksTestData from 'domain/books/test/BooksTestData';
 import CategoryTestData from 'domain/books/test/CategoryTestData';
 import CollectionTestData from 'domain/books/test/CollectionTestData';
 import React from 'react';
+import { connect } from 'react-redux';
 import { RouteComponentProps, StaticContext } from 'react-router';
+import { Dispatch } from 'redux';
+import {default as LibraryClass} from 'domain/books/entities/Library';
+import User from 'domain/authentication/entities/User';
+import Loading from 'components/molecules/Loading';
 
 interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
-
+  library: LibraryClass |undefined,
+  loading: boolean,
+  fail: boolean,
+  user: User | undefined,
+  fetchLibrary: (id: string) => void;
 }
 
-const Library: React.FC<IProps> = ({ history }) => {
+const Library: React.FC<IProps> = ({ history, user, library, loading, fail, fetchLibrary }) => {
   const onTapNewBooksHandler = () => {
     history.push('/my-books')
   }
@@ -32,18 +43,36 @@ const Library: React.FC<IProps> = ({ history }) => {
     history.push("/library/collection");
   };
 
+  React.useEffect(() => {
+    if (!user) return;
+    fetchLibrary(user.id);
+  }, [user]);
+
+  console.log(library);
+
   return (
     <DashboardTemplate
         library
-        toolbar={<GenericToolbarContent title="Libreria" button={<FilterButton />} />}
+        toolbar={<GenericToolbarContent title="Libreria" />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Mis Libros</SectionInformation>}
-        bookList={<BookList books={BooksTestData} onBookPress={onBookPresHandler} />}
-        categoriesTitle={<SectionInformation>Categorias Favoritas</SectionInformation>}
-        categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
+        bookList={!loading && library ? <BookList books={library.booksList} onBookPress={onBookPresHandler} /> : <Loading /> }
+        categoriesTitle={false ? <SectionInformation>Categorias Favoritas</SectionInformation> : <></>}
+        categoryList={false ? <HorizontalCategoryList categories={CategoryTestData} /> : <></>}
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Mis Audioclases</SectionInformation>}
-        collectionList={<HorizontalCollectionList collections={CollectionTestData} onCollectionPress={onCollectionListHandler} />}
+        collectionList={!loading && library ? <HorizontalCollectionList collections={library.collectionsList} onCollectionPress={onCollectionListHandler} /> : <Loading />}
     />
   );
 };
 
-export default Library;
+const mapStateToProps = (state: IApplicationStore) => ({
+  library: state.libraryState.library,
+  loading: state.libraryState.loadingLibrary,
+  fail: state.libraryState.failFetchingCategories,
+  user: state.authenticationState.user,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchLibrary: (id: string) => dispatch(fetchLibrary(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Library);
