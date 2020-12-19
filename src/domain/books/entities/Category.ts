@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 export default class Category {
     id: string;
     name: string;
@@ -5,5 +6,10 @@ export default class Category {
     constructor(id: string, name: string) {
         this.id = id;
         this.name = name;
+    }
+
+    static fromFirestore(doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>): Category {
+        const { id, name } = doc.data() as Category;
+        return new Category(id, name);
     }
 }

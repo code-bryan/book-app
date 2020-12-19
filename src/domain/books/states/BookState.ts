@@ -6,9 +6,9 @@ import BookService from "../services/BookService";
 const service = new BookService();
 
 export enum BookActions {
-    FETCH_BOOKS = '/books/collections/FETCH_BOOKS',
-    LOADING_BOOKS = '/books/collections/LOADING_BOOKS',
-    FAIL_BOOKS = '/books/collections/FAIL_BOOKS',
+    FETCH_BOOKS = '/books/books/FETCH_BOOKS',
+    LOADING_BOOKS = '/books/books/LOADING_BOOKS',
+    FAIL_BOOKS = '/books/books/FAIL_BOOKS',
 }
 
 export interface IBookState {
@@ -46,8 +46,8 @@ export const failFetchingBooks = (): IAction => ({ type: BookActions.FAIL_BOOKS,
 export const fetchBooks = (): any => async (dispatch: Dispatch<IAction>) => {
     try {
         dispatch(loadingBooks(true));
-        const collections = await service.all();
-        dispatch(setBooks(collections));
+        const books = await service.all();
+        dispatch(setBooks(books));
     } catch (e) {
         dispatch(failFetchingBooks());
     } finally {

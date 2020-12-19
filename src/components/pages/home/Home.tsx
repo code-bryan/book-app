@@ -8,9 +8,12 @@ import HorizontalCollectionList from 'components/organisms/books/HorizontalColle
 import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
 import { IApplicationStore } from 'domain/application/Store';
+import User from 'domain/authentication/entities/User';
 import Book from 'domain/books/entities/Book';
+import Category from 'domain/books/entities/Category';
 import Collection from 'domain/books/entities/Collection';
 import { fetchBooks } from 'domain/books/states/BookState';
+import { fetchCategories } from 'domain/books/states/CategoryState';
 import { fetchCollections } from 'domain/books/states/CollectionState';
 import BooksTestData from 'domain/books/test/BooksTestData';
 import CategoryTestData from 'domain/books/test/CategoryTestData';
@@ -26,11 +29,16 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
   loadingBooks: boolean,
   books: Book[],
   failBooks: boolean,
+  loadingCategories: boolean,
+  categories: Category[],
+  failCategories: boolean,
+  user: User | undefined,
   fetchCollections: () => void;
   fetchBooks: () => void;
+  fetchCategories: () => void;
 }
 
-const Home: React.FC<IProps> = ({ history, loadingCollections, collections, fetchCollections, loadingBooks, books, fetchBooks }) => {
+const Home: React.FC<IProps> = ({ history, user, loadingCollections, collections, fetchCollections, loadingBooks, books, fetchBooks, loadingCategories, categories, fetchCategories }) => {
   const onTapNewBooksHandler = () => {
     history.push('/new-books')
   }
@@ -51,11 +59,12 @@ const Home: React.FC<IProps> = ({ history, loadingCollections, collections, fetc
   React.useEffect(() => {
     fetchCollections();
     fetchBooks();
+    fetchCategories();
   }, [])
 
   return (
     <DashboardTemplate
-        toolbar={<SearchToolbar title="Hola, Bryan Astacio" />}
+        toolbar={<SearchToolbar title={`Hola, ${user!.name} ${user!.lastname}`} />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
         bookList={
           <>
@@ -65,7 +74,13 @@ const Home: React.FC<IProps> = ({ history, loadingCollections, collections, fetc
           </>
         }
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
-        categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
+        categoryList={
+          <>
+          {loadingCategories && <Loading />}
+            {(!loadingCategories && categories.length > 0) && <HorizontalCategoryList categories={categories} />}
+            {(!loadingCategories && categories.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay categoras disponibles</Text>}
+          </>
+        }
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}
         collectionList={
           <>
@@ -85,11 +100,16 @@ const mapStateToProps = (state: IApplicationStore) => ({
   loadingBooks: state.bookState.loadingBooks,
   books: state.bookState.books,
   failBooks: state.bookState.failFetchingBooks,
+  loadingCategories: state.categoriesState.loadingCategories,
+  categories: state.categoriesState.categories,
+  failCategories: state.categoriesState.failFetchingCategories,
+  user: state.authenticationState.user,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchCollections: () => dispatch(fetchCollections()),
   fetchBooks: () => dispatch(fetchBooks()),
+  fetchCategories: () => dispatch(fetchCategories()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

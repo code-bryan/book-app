@@ -2,7 +2,9 @@ import Book from "../entities/Book";
 import BookBaseService from "./BooksBaseService";
 
 export default class BookService extends BookBaseService {
-    private readonly Reference = 'books';
+    constructor() {
+        super("books");
+    }
 
     async all(): Promise<Book[]> {
        const snapchot = await this.firestore.collection(this.Reference).limit(12).get();
