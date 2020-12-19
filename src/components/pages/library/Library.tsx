@@ -1,4 +1,3 @@
-import FilterButton from 'components/molecules/FilterButton';
 import BookList from 'components/organisms/books/HorizontalBookList';
 import HorizontalCategoryList from 'components/organisms/books/HorizontalCategoryList';
 import HorizontalCollectionList from 'components/organisms/books/HorizontalCollectionList';
@@ -7,9 +6,7 @@ import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
 import { IApplicationStore } from 'domain/application/Store';
 import { fetchLibrary } from 'domain/books/states/LibraryState';
-import BooksTestData from 'domain/books/test/BooksTestData';
 import CategoryTestData from 'domain/books/test/CategoryTestData';
-import CollectionTestData from 'domain/books/test/CollectionTestData';
 import React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, StaticContext } from 'react-router';
@@ -26,7 +23,7 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
   fetchLibrary: (id: string) => void;
 }
 
-const Library: React.FC<IProps> = ({ history, user, library, loading, fail, fetchLibrary }) => {
+const Library: React.FC<IProps> = ({ history, user, library, loading, fetchLibrary }) => {
   const onTapNewBooksHandler = () => {
     history.push('/my-books')
   }
@@ -35,20 +32,19 @@ const Library: React.FC<IProps> = ({ history, user, library, loading, fail, fetc
     history.push('/my-discover')
   }
 
-  const onBookPresHandler = (id: string) => {
+  const onBookPresHandler = () => {
     history.push('/library/book');
   };
 
-  const onCollectionListHandler = (id: string) => {
+  const onCollectionListHandler = () => {
     history.push("/library/collection");
   };
 
   React.useEffect(() => {
     if (!user) return;
+    if (library) return;
     fetchLibrary(user.id);
   }, [user]);
-
-  console.log(library);
 
   return (
     <DashboardTemplate

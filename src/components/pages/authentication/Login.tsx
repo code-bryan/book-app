@@ -13,6 +13,7 @@ import { login, setCurrentUser } from 'domain/authentication/AuthenticationState
 import { IonAlert, IonLoading } from '@ionic/react';
 import User from 'domain/authentication/entities/User';
 import AuthenticationService from 'domain/authentication/services/AuthenticationService';
+import { fetchLibrary } from 'domain/books/states/LibraryState';
 
 interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
   user: User | undefined;
@@ -20,9 +21,10 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
   failAuthenticating: boolean;
   setLogin: (credentials: LoginRequest) => void;
   setUser: (user: User) => void;
+  fetchLibrary: (id: string) => void;
 }
 
-const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAuthenticating, setUser }) => {
+const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAuthenticating, setUser, fetchLibrary }) => {
   const [fail, setFail] = React.useState<boolean>(false);
   const [verifierRunning, setVerifierRunning] = React.useState<boolean>(false);
 
@@ -50,6 +52,7 @@ const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAut
 
   React.useEffect(() => {
     if (user) {
+      fetchLibrary(user.id);
       history.push('/home');
     }
   }, [user])
@@ -58,8 +61,9 @@ const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAut
     const verifier = async () => {
       setVerifierRunning(true);
       const user = await new AuthenticationService().verifyLogin();
-      console.log(user);
       if (!user) return;
+
+      fetchLibrary(user.id);
       setUser(user);
       setVerifierRunning(false);
       history.push('/home');
@@ -109,6 +113,7 @@ const mapStateToProps = (state: IApplicationStore) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setLogin: (credentials: LoginRequest) => dispatch(login(credentials)),
   setUser: (user: User) => dispatch(setCurrentUser(user)),
+  fetchLibrary: (id: string) => dispatch(fetchLibrary(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
