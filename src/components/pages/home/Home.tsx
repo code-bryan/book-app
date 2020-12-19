@@ -1,9 +1,7 @@
-import { IonLoading, IonSpinner } from '@ionic/react';
 import Text from 'components/atoms/Text';
 import Loading from 'components/molecules/Loading';
 import SearchToolbar from 'components/molecules/SearchToolbar';
 import BookList from 'components/organisms/books/HorizontalBookList';
-import HorizontalCategoryList from 'components/organisms/books/HorizontalCategoryList';
 import HorizontalCollectionList from 'components/organisms/books/HorizontalCollectionList';
 import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
@@ -76,12 +74,12 @@ const Home: React.FC<IProps> = ({ history, user, loadingCollections, collections
             {(!loadingBooks && books.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay libros disponibles</Text>}
           </>
         }
-        categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
+        categoriesTitle={false ? <SectionInformation>Categorias</SectionInformation> : <></>}
         categoryList={
           <>
-            {loadingCategories && <Loading />}
+            {/* {loadingCategories && <Loading />}
             {(!loadingCategories && categories.length > 0) && <HorizontalCategoryList categories={categories} />}
-            {(!loadingCategories && categories.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay categoras disponibles</Text>}
+            {(!loadingCategories && categories.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay categoras disponibles</Text>} */}
           </>
         }
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}

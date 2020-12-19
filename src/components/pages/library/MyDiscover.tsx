@@ -13,7 +13,7 @@ const MyDiscover: React.FC<IProps> = ({ history }) => {
     return (
         <CollectionsTemplate
             toolbar={<GenericToolbarContent title={"Mis Audioclases"} button={<FilterButton />} />}
-            list={<CollectionsList />}
+            list={<CollectionsList collections={[]} />}
         />
     );
 }

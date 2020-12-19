@@ -1,6 +1,6 @@
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
 import CollectionInformation from 'components/organisms/CollectionInformation';
-import CollectionTestData from 'domain/books/test/CollectionTestData';
+import Collection from 'domain/books/entities/Collection';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,14 +11,19 @@ const Container = styled.div`
     align-items: center;
 `;
 
-const CollectionList = () => {
+interface IProps {
+    collections: Collection[];
+    onPress?: (id: string) => void;
+}
+
+const CollectionList: React.FC<IProps> = ({ collections, onPress }) => {
     return (
         <Container>
             <IonGrid style={{ width: '100%' }}>
                 <IonRow>
-                    {CollectionTestData.map((collection) => (
+                    {collections.map((collection) => (
                         <IonCol size="6" key={collection.id}>
-                            <CollectionInformation data={collection} width={140} height={150} />
+                            <CollectionInformation data={collection} width={140} height={150} onCollectionPress={(id) => onPress?.(id)} />
                         </IonCol>
                     ))}
                 </IonRow>
