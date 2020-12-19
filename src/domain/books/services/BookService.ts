@@ -8,7 +8,7 @@ export default class BookService extends BookBaseService {
 
     async all(): Promise<Book[]> {
        const snapchot = await this.firestore.collection(this.Reference).limit(12).get();
-       return snapchot.docs.map<Book>((doc) => Book.fromFirestore(doc))
+       return snapchot.docs.map<Book>((doc) => Book.fromFirestore(doc));
     }
 
     async find(id: string): Promise<Book> {
