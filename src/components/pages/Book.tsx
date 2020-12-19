@@ -1,3 +1,4 @@
+import { IonAlert } from '@ionic/react';
 import BookDescription from 'components/molecules/BookDescription';
 import BookDetails from 'components/molecules/BookDetails';
 import Loading from 'components/molecules/Loading';
@@ -5,7 +6,7 @@ import BookAction from 'components/organisms/BookAction';
 import BookTemplate from 'components/templates/BookTemplate';
 import { IApplicationStore } from 'domain/application/Store';
 import {default as BookClass} from 'domain/books/entities/Book';
-import { fetchBook } from 'domain/books/states/BookState';
+import { clearBook, fetchBook } from 'domain/books/states/BookState';
 import { setActive, setMinimize } from 'domain/player/PlayerState';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -23,8 +24,7 @@ interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
     fetchBook: (id: string) => void;
 }
 
-const Book: React.FC<IProps> = ({ match, book, loading, fail, active, minimize, setActive, setMinimize, fetchBook }) => {
-
+const Book: React.FC<IProps> = ({ history, match, book, loading, fail, active, minimize, setActive, setMinimize, fetchBook }) => {
     const onPlayPressHandler = () => {
         if (active) {
             setMinimize(!minimize)
@@ -33,9 +33,16 @@ const Book: React.FC<IProps> = ({ match, book, loading, fail, active, minimize, 
         }
     };
 
+    const onDidDismissHandler = () => {
+        history.goBack();
+    }
+
+    const onAddPressHandler = () => {
+
+    }
+
     React.useEffect(() => {
-        // fetchBook(match.params.id);
-        fetchBook(`6EJR4k6vgmxqt4IbTczV`);
+        fetchBook(match.params.id);
     }, []);
 
     return (
@@ -43,8 +50,20 @@ const Book: React.FC<IProps> = ({ match, book, loading, fail, active, minimize, 
             <BookTemplate
                 bookDetails={!loading && book ? <BookDetails book={book} /> : <></> }
                 bookDescription={!loading && book ? <BookDescription description={book!.description} /> : <></>}
-                bookAction={!loading && book ? <BookAction playing={active} onPlayPress={onPlayPressHandler} /> : <></>}
+                bookAction={!loading && book ? <BookAction playing={active} onPlayPress={onPlayPressHandler} onAddPress={onAddPressHandler} /> : <></>}
                 loading={loading ? <Loading /> : <></>}
+            />
+            <IonAlert 
+                isOpen={fail} 
+                onDidDismiss={onDidDismissHandler} 
+                header="Error en libro"
+                message="No se pudo abrir el libro correctamente, intente nuevamente mas tarde" 
+                buttons={[
+                    {
+                        text: 'Aceptar',
+                        handler: onDidDismissHandler
+                    }
+                ]}
             />
         </>
     );
@@ -62,6 +81,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     setActive: (active: boolean) => dispatch(setActive(active)),
     setMinimize: (minimize: boolean) => dispatch(setMinimize(minimize)),
     fetchBook: (id: string) => dispatch(fetchBook(id)),
+    clearBook: () => dispatch(clearBook()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Book);

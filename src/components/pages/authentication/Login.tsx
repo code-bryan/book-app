@@ -80,7 +80,7 @@ const Login: React.FC<IProps> = ({ history, setLogin, user, loadingUser, failAut
         message="Usuario o contraseña incorrectos, intente nuevamente" 
         buttons={[
           {
-            text: 'Okay',
+            text: 'Aceptar',
             handler: onDidDismissHandler
           }
         ]}

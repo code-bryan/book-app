@@ -4,8 +4,6 @@ import Book from 'domain/books/entities/Book';
 import React from 'react';
 import styled from 'styled-components';
 
-const Img = require('assets/images/book-image.png');
-
 const Container = styled.div`
     display: flex;
     flex-direction: row;

@@ -1,6 +1,6 @@
 import Book from "../entities/Book";
 import BookBaseService from "./BooksBaseService";
-
+import firebase from 'firebase';
 export default class BookService extends BookBaseService {
     constructor() {
         super("books");
@@ -16,4 +16,9 @@ export default class BookService extends BookBaseService {
         const { name, authors, categories, image, description } = snapshot.data() as Book;
         return new Book(snapshot.id, name, description, image, authors, categories);
     }
-}
+
+    async findMultiples(ids: string[]): Promise<Book[]> {
+        const snapchot = await this.firestore.collection(this.Reference).where(firebase.firestore.FieldPath.documentId(), 'in', ids).get()
+        return snapchot.docs.map<Book>((doc) => Book.fromFirestore(doc))
+    }
+}   

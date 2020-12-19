@@ -21,10 +21,12 @@ interface IProps {
     bookListTitle: React.ReactNode;
     bookList: React.ReactNode;
     quotes: React.ReactNode;
+    loading: React.ReactNode;
+    description: React.ReactNode;
     imageHeight: number;
 }
 
-const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, bookList, quotes, imageHeight }) => {
+const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, bookList, quotes, imageHeight, loading, description }) => {
     const [scroll, setScroll] = React.useState<number>(0);
     
     return (
@@ -38,18 +40,10 @@ const CollectionTemplate: React.FC<IProps> = ({ image, title, bookListTitle, boo
                 </Section>
 
                 <Section>
-                    <SectionText>
-                        <Text color="secondary" size={15} weight={500} whiteSpace="break-spaces">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut erat id odio ornare pulvinar. 
-                        </Text>
-                    </SectionText>
-
-                    <SectionText>
-                        <Text color="secondary" size={15} weight={500} whiteSpace="break-spaces">
-                            Sed scelerisque nibh mi, vitae pulvinar ante cursus eget. Nunc rutrum, dolor quis accumsan venenatis, arcu lectus dictum metus, non sagittis risus lectus eget felis. Vestibulum volutpat ac tellus a volutpat. 
-                        </Text>
-                    </SectionText>
+                    {description}
                 </Section>
+
+                {loading}
 
                 <Section>
                     {quotes}

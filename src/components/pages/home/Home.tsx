@@ -46,12 +46,11 @@ const Home: React.FC<IProps> = ({ history, user, loadingCollections, collections
   }
 
   const onBookPresHandler = (id: string) => {
-    console.log(id);
     history.push(`/home/book/${id}`);
   };
 
   const onCollectionListHandler = (id: string) => {
-    history.push("/home/collection");
+    history.push(`/home/collection/${id}`);
   };
 
   const getName = (): string => {

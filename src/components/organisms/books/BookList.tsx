@@ -1,6 +1,6 @@
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
 import BookInformation from 'components/molecules/BookInformation';
-import BooksTestData from 'domain/books/test/BooksTestData';
+import Book from 'domain/books/entities/Book';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -14,9 +14,11 @@ const TitleContainer = styled.div`
 
 interface IProps {
     title?: React.ReactNode
+    books: Book[];
+    onPress?: (id: string) => void;
 }
 
-const BookList: React.FC<IProps> = ({ title }) => {
+const BookList: React.FC<IProps> = ({ title, books, onPress }) => {
     return (
         <Container>
             {title && (
@@ -26,9 +28,9 @@ const BookList: React.FC<IProps> = ({ title }) => {
             )}
             <IonGrid>
                 <IonRow>
-                    {BooksTestData.map((book) => (
+                    {books.map((book) => (
                         <IonCol size="6" key={book.id}>
-                            <BookInformation book={book} />
+                            <BookInformation book={book} onPress={(id) => onPress?.(id)} />
                         </IonCol>
                     ))}
                 </IonRow>

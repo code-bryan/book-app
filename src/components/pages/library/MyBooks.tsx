@@ -8,7 +8,7 @@ const MyBooks = () => {
     return (
         <BookListTemplate
             toolbar={<GenericToolbarContent title="Mis Libros" button={<FilterButton />} />}
-            bookList={<BookList />}
+            bookList={<BookList books={[]} />}
         />
     )
 };

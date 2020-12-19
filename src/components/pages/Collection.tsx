@@ -5,32 +5,61 @@ import { RouteComponentProps, StaticContext } from 'react-router';
 import Text from 'components/atoms/Text';
 import Image from 'components/atoms/Image';
 import CollectionQuote from 'components/molecules/CollectionQuote';
-
-const Img = require('assets/images/big-collection-image.png');
-
+import { connect } from 'react-redux';
+import { IApplicationStore } from 'domain/application/Store';
+import { Dispatch } from 'redux';
+import { clearCollection, fetchCollection } from 'domain/books/states/CollectionState';
+import {default as CollectionClass} from 'domain/books/entities/Collection';
+import Loading from 'components/molecules/Loading';
 interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
-    
+    collection: CollectionClass | undefined;
+    loading: boolean;
+    fail: boolean;
+    setCollection: (id: string) => void;
+    clearCollection: () => void;
 }
 
-const Collection: React.FC<IProps> = () => {
+const Collection: React.FC<IProps> = ({ match, history, collection, loading, fail, setCollection, clearCollection }) => {
     const imageHeight = React.useRef(window.innerHeight / 3.5);
+
+    const onBookPressHandler = (id: string) => {
+        history.push(`/home/book/${id}`);
+    }
+
+    React.useEffect(() => {
+        console.log(match.params.id);
+        setCollection(match.params.id);
+
+        return () => clearCollection();
+    }, []);
 
     return(
         <CollectionTemplate
-            title={<Text color="secondary" weight={"bold"}>Ideas - Libros motivaciones</Text>}
-            image={<Image src={Img} width={window.innerWidth} height={imageHeight.current} />}
-            bookListTitle={<Text color="secondary" weight={500}>Libros</Text>}
+            loading={loading ? <Loading /> : <></>}
+            title={collection ? <Text color="secondary" weight={"bold"}>Ideas - Libros motivaciones</Text> : <></>}
+            image={collection ? <Image src={collection?.image} width={window.innerWidth} height={imageHeight.current} /> : <></>}
+            bookListTitle={collection ? <Text color="secondary" weight={500}>Libros</Text> : <></>}
+            description={collection ? <Text color="secondary" size={15} weight={500} whiteSpace="break-spaces">{collection.description}</Text> : <></>}
             quotes={
                 <>
-                    <CollectionQuote big>{"Inspirarse"}</CollectionQuote>
-                    <CollectionQuote big>{"Aprender"}</CollectionQuote>
-                    <CollectionQuote big>{"Recuentos de la vida"}</CollectionQuote>
+                    {collection && collection.quotes.map((quote) => <CollectionQuote big>{quote}</CollectionQuote>)}
                 </>
             }
-            bookList={<BookList />}
+            bookList={collection ? <BookList books={collection.bookList} onPress={onBookPressHandler} /> : <></>}
             imageHeight={imageHeight.current}
         />
     );
 }
 
-export default Collection;
+const stateMapToProps = (state: IApplicationStore) => ({
+    collection: state.collectionsState.collection,
+    loading: state.collectionsState.loadingCollection,
+    fail: state.collectionsState.failFetchingCollection,
+});
+
+const dispateToProps = (dispatch: Dispatch) => ({
+    setCollection: (id: string) => dispatch(fetchCollection(id)),
+    clearCollection: () =>  dispatch(clearCollection())
+})
+
+export default connect(stateMapToProps, dispateToProps)(Collection);

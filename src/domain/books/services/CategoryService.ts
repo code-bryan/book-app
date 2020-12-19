@@ -11,4 +11,5 @@ export default class CategoryService extends BookBaseService {
        return snapchot.docs.map<Category>((doc) => Category.fromFirestore(doc))
     }
 
+    
 }

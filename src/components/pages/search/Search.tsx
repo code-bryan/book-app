@@ -17,7 +17,7 @@ const Search: React.FC<RouteComponentProps<any, StaticContext, unknown>> = () =>
             categoryTagList={<CategoryTagList />}
             collectionTagList={<CollectionTagList />}
             bookList={
-                <BookList title={<Text weight={600} color="secondary">Libros</Text>} />
+                <BookList books={[]} title={<Text weight={600} color="secondary" >Libros</Text>} />
             }
         />
     );

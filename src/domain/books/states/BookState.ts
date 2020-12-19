@@ -61,7 +61,7 @@ const reducer = (state = defaultState, action: IAction): IBookState => {
     }
 
     if (action.type === BookActions.FAIL_BOOKS) {
-        return Object.assign({}, { ...state, failFetchingBook: true, book: undefined });
+        return Object.assign({}, { ...state, failFetchingBook: false, loadingBook: false, book: undefined });
     }
 
     return state;
