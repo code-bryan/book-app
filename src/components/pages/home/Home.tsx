@@ -8,7 +8,9 @@ import HorizontalCollectionList from 'components/organisms/books/HorizontalColle
 import SectionInformation from 'components/organisms/SectionInformation';
 import DashboardTemplate from 'components/templates/DashboardTemplate';
 import { IApplicationStore } from 'domain/application/Store';
+import Book from 'domain/books/entities/Book';
 import Collection from 'domain/books/entities/Collection';
+import { fetchBooks } from 'domain/books/states/BookState';
 import { fetchCollections } from 'domain/books/states/CollectionState';
 import BooksTestData from 'domain/books/test/BooksTestData';
 import CategoryTestData from 'domain/books/test/CategoryTestData';
@@ -18,13 +20,17 @@ import { RouteComponentProps, StaticContext } from 'react-router';
 import { Dispatch } from 'redux';
 
 interface IProps extends RouteComponentProps<any, StaticContext, unknown> {
-  loading: boolean,
+  loadingCollections: boolean,
   collections: Collection[],
-  fail: boolean,
+  failCollections: boolean,
+  loadingBooks: boolean,
+  books: Book[],
+  failBooks: boolean,
   fetchCollections: () => void;
+  fetchBooks: () => void;
 }
 
-const Home: React.FC<IProps> = ({ history, loading, collections, fail, fetchCollections }) => {
+const Home: React.FC<IProps> = ({ history, loadingCollections, collections, fetchCollections, loadingBooks, books, fetchBooks }) => {
   const onTapNewBooksHandler = () => {
     history.push('/new-books')
   }
@@ -44,21 +50,28 @@ const Home: React.FC<IProps> = ({ history, loading, collections, fail, fetchColl
 
   React.useEffect(() => {
     fetchCollections();
+    fetchBooks();
   }, [])
 
   return (
     <DashboardTemplate
         toolbar={<SearchToolbar title="Hola, Bryan Astacio" />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
-        bookList={<BookList books={BooksTestData} onBookPress={onBookPresHandler} />}
+        bookList={
+          <>
+            {loadingBooks && <Loading />}
+            {(!loadingBooks && books.length > 0) && <BookList books={books} onBookPress={onBookPresHandler} />}
+            {(!loadingBooks && books.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay libros disponibles</Text>}
+          </>
+        }
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={<HorizontalCategoryList categories={CategoryTestData} />}
         discoverTitle={<SectionInformation onTap={onTapDiscoverHandler}>Descubre</SectionInformation>}
         collectionList={
           <>
-            {loading && <Loading />}
-            {(!loading && collections.length > 0) && <HorizontalCollectionList collections={collections} onCollectionPress={onCollectionListHandler} />}
-            {(!loading && collections.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay colleciones disponibles</Text>}
+            {loadingCollections && <Loading />}
+            {(!loadingCollections && collections.length > 0) && <HorizontalCollectionList collections={collections} onCollectionPress={onCollectionListHandler} />}
+            {(!loadingCollections && collections.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay colleciones disponibles</Text>}
           </>
         }
     />
@@ -66,13 +79,17 @@ const Home: React.FC<IProps> = ({ history, loading, collections, fail, fetchColl
 };
 
 const mapStateToProps = (state: IApplicationStore) => ({
-  loading: state.collectionsState.loadingCollections,
+  loadingCollections: state.collectionsState.loadingCollections,
   collections: state.collectionsState.collections,
-  fail: state.collectionsState.failFetchingCollections,
+  failCollections: state.collectionsState.failFetchingCollections,
+  loadingBooks: state.bookState.loadingBooks,
+  books: state.bookState.books,
+  failBooks: state.bookState.failFetchingBooks,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchCollections: () => dispatch(fetchCollections()),
+  fetchBooks: () => dispatch(fetchBooks()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

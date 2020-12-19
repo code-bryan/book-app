@@ -7,8 +7,8 @@ const service = new CollectionService();
 
 export enum CollectionActions {
     FETCH_CATEGORIES = '/books/collections/FETCH_CATEGORIES',
-    LOADING_CATEGORIES = '/books/collections/LOADING_CATEGORIES',
-    FAIL_CATEGORIES = '/books/collections/FAIL_CATEGORIES',
+    LOADING_COLLECTIONS = '/books/collections/LOADING_COLLECTIONS',
+    FAIL_COLLECTIONS = '/books/collections/FAIL_CATEGORIES',
 }
 
 export interface ICollectionState {
@@ -29,11 +29,11 @@ const reducer = (state = defaultState, action: IAction): ICollectionState => {
         return Object.assign({}, { ...state, collections: action.payload });
     }
 
-    if (action.type === CollectionActions.LOADING_CATEGORIES) {
+    if (action.type === CollectionActions.LOADING_COLLECTIONS) {
         return Object.assign({}, { ...state, loadingCollections: action.payload });
     }
 
-    if (action.type === CollectionActions.FAIL_CATEGORIES) {
+    if (action.type === CollectionActions.FAIL_COLLECTIONS) {
         return Object.assign({}, { ...state, failFetchingCollections: true, collections: [] });
     }
 
@@ -41,8 +41,8 @@ const reducer = (state = defaultState, action: IAction): ICollectionState => {
 }
 
 export const setCollections = (collections: Collection[]): IAction => ({ type: CollectionActions.FETCH_CATEGORIES, payload: collections });
-export const loadingCollections = (isLoading: boolean): IAction => ({ type: CollectionActions.LOADING_CATEGORIES, payload: isLoading });
-export const failFetchingCollections = (): IAction => ({ type: CollectionActions.FAIL_CATEGORIES, payload: null });
+export const loadingCollections = (isLoading: boolean): IAction => ({ type: CollectionActions.LOADING_COLLECTIONS, payload: isLoading });
+export const failFetchingCollections = (): IAction => ({ type: CollectionActions.FAIL_COLLECTIONS, payload: null });
 
 export const fetchCollections = (): any => async (dispatch: Dispatch<IAction>) => {
     try {

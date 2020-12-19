@@ -34,7 +34,7 @@ const BookInformation: React.FC<IProps> = ({ book, onPress }) => (
         <Image src={book.image} />
         <TextContainer>
             <Text color="secondary" size={14} weight={500}>{book.name}</Text>
-            <AuthorText color="secondary" size={14} weight={500}>{book.authors[0]}</AuthorText>
+            <AuthorText color="secondary" size={14} weight={500}>{book.firstAuthor()}</AuthorText>
         </TextContainer>
     </Container>
 );
