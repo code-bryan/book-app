@@ -16,7 +16,7 @@ export default class Collection {
     }
 
     static fromFirestore(doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>): Collection {
-        const { id, name, description, image, quotes } = doc.data() as Collection;
-        return new Collection(id, name, description, image, quotes);
+        const { name, description, image, quotes } = doc.data() as Collection;
+        return new Collection(doc.id, name, description, image, quotes);
     }
 }

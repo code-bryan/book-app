@@ -15,8 +15,6 @@ import Collection from 'domain/books/entities/Collection';
 import { fetchBooks } from 'domain/books/states/BookState';
 import { fetchCategories } from 'domain/books/states/CategoryState';
 import { fetchCollections } from 'domain/books/states/CollectionState';
-import BooksTestData from 'domain/books/test/BooksTestData';
-import CategoryTestData from 'domain/books/test/CategoryTestData';
 import React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, StaticContext } from 'react-router';
@@ -48,23 +46,29 @@ const Home: React.FC<IProps> = ({ history, user, loadingCollections, collections
   }
 
   const onBookPresHandler = (id: string) => {
-    history.push('/home/book');
+    console.log(id);
+    history.push(`/home/book/${id}`);
   };
 
   const onCollectionListHandler = (id: string) => {
     history.push("/home/collection");
   };
 
+  const getName = (): string => {
+    if (!user) return '';
+
+    return `${user.name} ${user.lastname}`;
+  }
 
   React.useEffect(() => {
     fetchCollections();
     fetchBooks();
     fetchCategories();
-  }, [])
+  }, []);
 
   return (
     <DashboardTemplate
-        toolbar={<SearchToolbar title={`Hola, ${user!.name} ${user!.lastname}`} />}
+        toolbar={<SearchToolbar title={`Hola, ${getName()}`} />}
         booksTitle={<SectionInformation onTap={onTapNewBooksHandler}>Libros nuevos</SectionInformation>}
         bookList={
           <>
@@ -76,7 +80,7 @@ const Home: React.FC<IProps> = ({ history, user, loadingCollections, collections
         categoriesTitle={<SectionInformation>Categorias</SectionInformation>}
         categoryList={
           <>
-          {loadingCategories && <Loading />}
+            {loadingCategories && <Loading />}
             {(!loadingCategories && categories.length > 0) && <HorizontalCategoryList categories={categories} />}
             {(!loadingCategories && categories.length <= 0) && <Text color="secondary" width="100%" weight={500} align="center">No hay categoras disponibles</Text>}
           </>

@@ -9,7 +9,7 @@ export default class Category {
     }
 
     static fromFirestore(doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>): Category {
-        const { id, name } = doc.data() as Category;
-        return new Category(id, name);
+        const { name } = doc.data() as Category;
+        return new Category(doc.id, name);
     }
 }

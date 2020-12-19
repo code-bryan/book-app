@@ -14,9 +14,10 @@ interface IProps {
     bookDetails: React.ReactNode;
     bookDescription: React.ReactNode;
     bookAction?: React.ReactNode;
+    loading?: React.ReactNode;
 }
 
-const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription, bookAction }) => {
+const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription, bookAction, loading }) => {
     return (
         <IonPage>
             <BookToolbar />
@@ -25,6 +26,8 @@ const BookTemplate: React.FC<IProps> = ({ bookDetails, bookDescription, bookActi
                     {bookDetails}
                 </FirstSection>
                 
+                {loading}
+
                 <Section>
                     {bookDescription}
                 </Section>

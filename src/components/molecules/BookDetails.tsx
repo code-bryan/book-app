@@ -1,5 +1,6 @@
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Book from 'domain/books/entities/Book';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -41,13 +42,14 @@ const TextDate = styled.div`
 
 interface IProps {
     actionButton?: React.ReactNode;
+    book: Book;
 }
 
-const BookDetails: React.FC<IProps> = ({ actionButton }) => {
+const BookDetails: React.FC<IProps> = ({ actionButton, book }) => {
     return (
         <Container>
             <ImageContainer>
-                <Image src={Img} height={170} width={135} />
+                <Image src={book.image} height={170} width={135} />
             </ImageContainer>
            
             <DetailsContainer>
@@ -55,7 +57,7 @@ const BookDetails: React.FC<IProps> = ({ actionButton }) => {
                     <Text size={18} color="secondary" weight={500} whiteSpace="break-spaces">
                         Por
                         <br />
-                        King James
+                        {book.authors.map((author) => author.name)}
                     </Text>
                 </Section>
                 

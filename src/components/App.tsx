@@ -70,7 +70,7 @@ const App: React.FC<any> = ({ ...props }) => {
                     <Route path="/home" component={Home} exact={true} />
                     <Route path="/new-books" component={NewBookList} exact={true} />
                     <Route path='/discover' component={Discover} exact={true} />
-                    <Route path="/home/book" component={Book} exact={true} />
+                    <Route path="/home/book/:id" component={Book} exact={true} />
                     <Route path="/home/collection" component={Collection} exact={true} />
 
                     {/* home routes */}
